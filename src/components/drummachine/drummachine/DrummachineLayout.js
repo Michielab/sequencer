@@ -22,16 +22,13 @@ const styles = theme =>
       WebkitBoxShadow: '32px 24px 62px -7px rgba(0,0,0,0.56)',
       MozBoxShadow: '32px 24px 62px -7px rgba(0,0,0,0.56)',
       boxShadow: '32px 24px 62px -7px rgba(0,0,0,0.56)',
+      [theme.breakpoints.only('xs')]: {
+        padding: 5,
+        width: '95%',
+      },
       [theme.breakpoints.only('sm')]: {
         padding: 10,
         width: '95%',
-        // color: 'red',
-        // height: '100%',
-        // top: 0,
-        // left: '',
-        // maxWidth: '',
-        // marginRight: '',
-        // transform: ''
       },
       [theme.breakpoints.up('lg')]: {
         width: '100%'
@@ -46,13 +43,11 @@ const styles = theme =>
       gridTemplateRows: 'repeat(13, (row) auto (gutter) 20px )',
       rowGap: '5px',
       gridGap: '5px',
+      [theme.breakpoints.only('xs')]: {
+        gridGap: '1px',
+      },
       [theme.breakpoints.only('sm')]: {
         gridGap: '3px',
-        // transform: 'rotate(90deg)',
-        // height: '100%'
-        // gridTemplateColumns:
-        //   ' (gutter) 1fr repeat(7, (col) 4.25fr (gutter) 1fr )',
-        // gridTemplateRows: 'repeat(20, (row) auto (gutter) 20px )'
       }
 
     },

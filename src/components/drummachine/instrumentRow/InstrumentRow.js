@@ -17,6 +17,14 @@ const styles = theme =>
       '&:hover': {
         backgroundColor: '#212121'
       },
+      [theme.breakpoints.only('xs')]: {
+        width: '100%',
+        minWidth: '20px',
+        minHeight: '20px',
+        height: '80%',
+        alignSelf: 'center',
+        borderWidth: '1px'
+      },
       [theme.breakpoints.only('sm')]: {
         width: '100%',
         minWidth: '29px',
@@ -41,6 +49,9 @@ const styles = theme =>
       alignItems: 'center',
       marginRight: '10px',
       color: 'floralwhite',
+      [theme.breakpoints.only('xs')]: {
+        marginRight: 0
+      },
       [theme.breakpoints.only('sm')]: {
         marginRight: 2
       }
@@ -52,6 +63,9 @@ const styles = theme =>
       gridColumn: 1,
       color: '#D3D3D3',
       padding: '0',
+      [theme.breakpoints.only('xs')]: {
+        display: 'none'
+      },
       [theme.breakpoints.only('sm')]: {
         fontSize: '12px',
         width: '10px'
@@ -63,6 +77,11 @@ const styles = theme =>
       flexDirection: 'column',
       marginLeft: '10px',
       width: '100%',
+      [theme.breakpoints.only('xs')]: {
+        marginLeft: 0,
+        fontSize: '8px',
+        width: '20px'
+      },
       [theme.breakpoints.only('sm')]: {
         fontSize: '12px',
         width: '40px'
@@ -162,7 +181,6 @@ class InstrumentRow extends React.PureComponent {
           <div className={classes.instrumentNameContainer}>
             <span>{instrumentName}</span>
             <Slider
-              // style={{ width: '64px', height: '20px' }}
               style={{ width: '100%', height: '20px' }}
               classes={{
                 trackContainer: classes.slider,

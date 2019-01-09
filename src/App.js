@@ -10,7 +10,7 @@ class App extends Component {
         style={{
           height: '100vh',
           backgroundColor: '#333333',
-          position: 'relative'
+          position: 'relative',
         }}
       >
         <Drummachine />

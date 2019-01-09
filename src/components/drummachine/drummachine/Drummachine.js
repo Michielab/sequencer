@@ -4,7 +4,7 @@ import { triggerKick, sampleLoader } from '~/utils/Kick';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setCurrentStep } from '~/ducks/actions/actions';
-import AudioCtxContext from './audioContext/AudioContext';
+import AudioCtxContext from '../audioContext/AudioContext';
 
 const mapStateToProps = state => {
   return {
@@ -76,7 +76,7 @@ class Drummachine extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { playing, bpm } = this.props;
+    const { playing } = this.props;
     if (prevProps.playing !== playing) {
       !playing ? this.stopTickEvent() : this.startTickEvent();
     }
@@ -270,6 +270,7 @@ class Drummachine extends Component {
           gridArea: '1 / 7 / 3 / 13',
           width: '100%',
           height: '150px',
+          //small
           display: 'none'
         }}
       />

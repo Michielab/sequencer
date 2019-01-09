@@ -13,6 +13,10 @@ const styles = theme => ({
     gridRow: 3,
     textAlign: 'center',
     marginTop: '4px',
+    [theme.breakpoints.only('xs')]: {
+      fontSize: '8px',
+      alignSelf: 'center'
+    },
     [theme.breakpoints.only('sm')]: {
       textAlign: 'left',
       fontSize: '13px',
@@ -35,6 +39,13 @@ const styles = theme => ({
     textAlign: 'center',
     outline: 'initial !important',
     width: 'calc(100% - 6px)',
+    [theme.breakpoints.only('xs')]: {
+      gridColumn: '2 / 4',
+      alignSelf: 'center',
+      borderWidth: '1px',
+      height: '15px',
+      width: '35px'
+    },
     [theme.breakpoints.only('sm')]: {
       marginRight: 0,
       gridColumn: '2 / 4',
@@ -60,6 +71,16 @@ const styles = theme => ({
     borderRadius: '20%',
     width: '30px',
     padding: 0,
+    [theme.breakpoints.only('xs')]: {
+      width: '30px',
+      minWidth: '20px',
+      gridColumn: '14 / 16',
+      minHeight: 'unset',
+      height: '25px',
+      borderWidth: '1px',
+      justifySelf: 'center',
+      marginBottom: '5px'
+    },
     [theme.breakpoints.only('sm')]: {
       width: '40px',
       minWidth: '20px',
@@ -70,7 +91,6 @@ const styles = theme => ({
       marginBottom: '10px',
       borderWidth: '1px',
       justifySelf: 'center'
-
     },
     [theme.breakpoints.only('md')]: {
       width: '100%',
@@ -87,6 +107,16 @@ const styles = theme => ({
     borderRadius: '20%',
     width: '30px',
     padding: 0,
+    [theme.breakpoints.only('xs')]: {
+      width: '100%',
+      minWidth: '20px',
+      minHeight: 'unset',
+      marginBottom: '5px',
+      alignSelf: 'center',
+      height: '20px',
+      borderWidth: '1px',
+      justifySelf: 'center'
+    },
     [theme.breakpoints.only('sm')]: {
       width: '100%',
       minWidth: '20px',
@@ -96,7 +126,6 @@ const styles = theme => ({
       height: '25px',
       borderWidth: '1px',
       justifySelf: 'center'
-
     },
     [theme.breakpoints.only('md')]: {
       width: '100%',
@@ -117,6 +146,15 @@ const styles = theme => ({
     borderRadius: '20%',
     width: '30px',
     padding: 0,
+    [theme.breakpoints.only('xs')]: {
+      width: '30px',
+      minWidth: '20px',
+      gridColumn: '16 / 18',
+      minHeight: 'unset',
+      height: '25px',
+      borderWidth: '1px',
+      justifySelf: 'center'
+    },
     [theme.breakpoints.only('sm')]: {
       width: '40px',
       minWidth: '20px',
@@ -220,7 +258,6 @@ class Controls extends Component {
                   : ''
             }}
           >
-            {/* {'Part' + (index + 1)} */}
             {index + 1}
           </Button>
         ))}
