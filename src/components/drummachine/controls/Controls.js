@@ -240,13 +240,15 @@ class Controls extends Component {
                   ? 'rgba(255, 255, 255, 0.8)'
                   : 'rgba(255, 255, 255, 0.4)',
               borderColor:
-                currentStepPart === index
-                  ? '#33B65D'
+                activePart === index && currentStepPart === index
+                  ? 'rgba(255, 255, 255, 0.8)'
+                  : currentStepPart === index
+                  ? '#0C8330'
                   : activePart === index &&
                     selectedParts.indexOf(parts[index]) !== -1
                   ? 'rgba(255, 255, 255, 0.8)'
                   : selectedParts.indexOf(parts[index]) !== -1
-                  ? 'rgb(64, 69, 114)'
+                  ? '#8D80A3'
                   : activePart === index
                   ? 'rgba(255, 255, 255, 0.8)'
                   : 'rgba(255, 255, 255, 0.4)',
