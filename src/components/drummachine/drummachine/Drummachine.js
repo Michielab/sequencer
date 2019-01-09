@@ -79,6 +79,7 @@ class Drummachine extends Component {
     const { playing } = this.props;
     if (prevProps.playing !== playing) {
       !playing ? this.stopTickEvent() : this.startTickEvent();
+      this.audioContext.resume();  
     }
   }
 

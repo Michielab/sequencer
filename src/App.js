@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Drummachine from '~/components/drummachine/drummachine/DrummachineLayout';
-import Sequencer from '~/components/drummachine/Drummachine';
+import Sequencer from '~/components/drummachine/drummachine/Drummachine';
 
 class App extends Component {
   render() {
