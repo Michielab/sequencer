@@ -12,10 +12,10 @@ const styles = theme =>
     canvas: {
       width: '100%',
       height: '150px',
-      display: 'none',
-      [theme.breakpoints.only('xs')]: {
-        display: 'none'
-      }
+      // display: 'none',
+      // [theme.breakpoints.only('xs')]: {
+      //   display: 'none'
+      // }
     }
   });
 
@@ -82,7 +82,7 @@ class Drummachine extends Component {
       this.kickBuffer = buffer;
     });
     // if (this.canvas.offsetWidth > 600) {
-    //   this.draw();
+      this.draw();
     // }
   }
 
