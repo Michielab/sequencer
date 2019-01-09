@@ -93,6 +93,15 @@ const styles = theme =>
     slider: {
       width: '64px',
       height: '20px'
+    },
+    volumeIcons: {
+      [theme.breakpoints.only('xs')]: {
+        display: 'none'
+      },
+      [theme.breakpoints.only('sm')]: {
+        fontSize: '12px',
+        width: '10px'
+      }
     }
   });
 
@@ -176,7 +185,11 @@ class InstrumentRow extends React.PureComponent {
             }}
             className={classes.muteButton}
           >
-            {gainValue === 0 ? <VolumeMute /> : <VolumeUp />}
+            {gainValue === 0 ? (
+              <VolumeMute classes={{ root: classes.volumeIcons }} />
+            ) : (
+              <VolumeUp classes={{ root: classes.volumeIcons }} />
+            )}
           </Button>
           <div className={classes.instrumentNameContainer}>
             <span>{instrumentName}</span>

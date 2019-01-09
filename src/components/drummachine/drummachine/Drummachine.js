@@ -5,6 +5,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setCurrentStep } from '~/ducks/actions/actions';
 import AudioCtxContext from '../audioContext/AudioContext';
+import { withStyles, createStyles } from '@material-ui/core';
+
+const styles = theme =>
+  createStyles({
+    canvas: {
+      width: '100%',
+      height: '150px',
+      [theme.breakpoints.only('xs')]: {
+        display: 'none'
+      }
+    }
+  });
 
 const mapStateToProps = state => {
   return {
@@ -68,7 +80,9 @@ class Drummachine extends Component {
     sampleLoader('./bd09.wav', this.audioContext, buffer => {
       this.kickBuffer = buffer;
     });
-    this.draw();
+    if (this.canvas.offsetWidth > 600) {
+      this.draw();
+    }
   }
 
   componentWillUnmount() {
@@ -79,7 +93,7 @@ class Drummachine extends Component {
     const { playing } = this.props;
     if (prevProps.playing !== playing) {
       !playing ? this.stopTickEvent() : this.startTickEvent();
-      this.audioContext.resume();  
+      this.audioContext.resume();
     }
   }
 
@@ -263,17 +277,11 @@ class Drummachine extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <canvas
         ref={this.canvasRef}
-        className="visualizer"
-        style={{
-          gridArea: '1 / 7 / 3 / 13',
-          width: '100%',
-          height: '150px',
-          //small
-          display: 'none'
-        }}
+        className={classes.canvas}
       />
     );
   }
@@ -282,7 +290,7 @@ class Drummachine extends Component {
 const ConnectedDrummachine = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Drummachine);
+)(withStyles(styles)(Drummachine));
 
 export default () => (
   <AudioCtxContext.Consumer>
