@@ -12,6 +12,7 @@ const styles = theme =>
     canvas: {
       width: '100%',
       height: '150px',
+      display: 'none',
       [theme.breakpoints.only('xs')]: {
         display: 'none'
       }
@@ -80,9 +81,9 @@ class Drummachine extends Component {
     sampleLoader('./bd09.wav', this.audioContext, buffer => {
       this.kickBuffer = buffer;
     });
-    if (this.canvas.offsetWidth > 600) {
-      this.draw();
-    }
+    // if (this.canvas.offsetWidth > 600) {
+    //   this.draw();
+    // }
   }
 
   componentWillUnmount() {
