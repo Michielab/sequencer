@@ -16,7 +16,6 @@ export const triggerKick = (context, deadline, gainMax, analyser) => {
     successive like points on a wave.   
     */
   const amplifier = context.createGain();
-
   /* 
     Connect our oscillator to the gain node we created
     */
@@ -26,7 +25,7 @@ export const triggerKick = (context, deadline, gainMax, analyser) => {
     The first parameter is the value you want to set and the second parameter is the time 
     on which you want te set the parameter.
     */
-  amplifier.gain.setValueAtTime(gainMax * 2, deadline);
+  amplifier.gain.setValueAtTime(gainMax, deadline);
   oscillator.frequency.exponentialRampToValueAtTime(50, deadline + 0.15);
 
   /* 
@@ -47,10 +46,15 @@ export const triggerKick = (context, deadline, gainMax, analyser) => {
 Exponential ramps are considered more useful when changing frequencies or playback rates than linear ramps because of the way the human ear works.
     */
   // amplifier.gain.exponentialRampToValueAtTime(0.001, deadline + 0.02);
-  amplifier.gain.exponentialRampToValueAtTime(0.01, deadline + 0.5);
+  amplifier.gain.exponentialRampToValueAtTime(0.0001, deadline + 0.5);
+
   amplifier.connect(analyser)
   /*  The last step is to connect the amplifier to the contect desitation aka sound device */
-  analyser.connect(context.destination);
+
+  const compressor = context.createDynamicsCompressor();
+ 
+  analyser.connect(compressor);
+  compressor.connect(context.destination);
 
 };
 

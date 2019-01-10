@@ -201,7 +201,7 @@ class InstrumentRow extends React.PureComponent {
                 pointer: classes.sliderPointer
               }}
               min={0}
-              max={200}
+              max={100}
               value={gainValue}
               onChange={value => changeAmplitude(instrumentName, value)}
               componentPropType="span"

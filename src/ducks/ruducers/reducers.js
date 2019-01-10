@@ -118,7 +118,7 @@ const audioContextDefaultState = {
     }
   },
   amplitude: {
-    mainGain: 100
+    mainGain: 50
   },
   parts: ['partOne', 'partTwo', 'partThree', 'partFour'],
   activePart: 0,

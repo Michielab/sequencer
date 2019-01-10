@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import WAAClock from 'waaclock';
-import { triggerKick, sampleLoader } from '~/utils/Kick';
+import { sampleLoader } from '~/utils/Kick';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setCurrentStep } from '~/ducks/actions/actions';
@@ -11,11 +11,7 @@ const styles = theme =>
   createStyles({
     canvas: {
       width: '100%',
-      height: '150px',
-      // display: 'none',
-      // [theme.breakpoints.only('xs')]: {
-      //   display: 'none'
-      // }
+      height: '30%',
     }
   });
 
@@ -57,6 +53,7 @@ class Drummachine extends Component {
     this.bufferLength = this.analyser.frequencyBinCount;
     this.dataArray = new Uint8Array(this.bufferLength);
 
+
     this.clock = new WAAClock(this.audioContext);
     sampleLoader('./hihat.wav', this.audioContext, buffer => {
       this.highHatBuffer = buffer;
@@ -81,9 +78,7 @@ class Drummachine extends Component {
     sampleLoader('./bd09.wav', this.audioContext, buffer => {
       this.kickBuffer = buffer;
     });
-    // if (this.canvas.offsetWidth > 600) {
       this.draw();
-    // }
   }
 
   componentWillUnmount() {
@@ -204,15 +199,22 @@ class Drummachine extends Component {
               : amplitudeValue
             : amplitudeValue;
 
-          instrument === 'kick'
-            ? triggerKick(this.audioContext, deadline, gainValue, this.analyser)
-            : this.triggerSound(
-                this.audioContext,
-                deadline,
-                this[buffer],
-                gainValue,
-                instrument
-              );
+            this.triggerSound(
+              this.audioContext,
+              deadline,
+              this[buffer],
+              gainValue,
+              instrument
+            );
+          // instrument === 'kick'
+          //   ? triggerKick(this.audioContext, deadline, gainValue, this.analyser)
+          //   : this.triggerSound(
+          //       this.audioContext,
+          //       deadline,
+          //       this[buffer],
+          //       gainValue,
+          //       instrument
+          //     );
         }
       }
     });
@@ -221,13 +223,15 @@ class Drummachine extends Component {
   }
 
   setupSound = (bufferType, gainValue) => {
+    this.compressor = this.audioContext.createDynamicsCompressor();
     this.source = this.audioContext.createBufferSource();
     this.source.buffer = bufferType;
     this.gain = this.audioContext.createGain();
     this.source.connect(this.gain);
     this.gain.connect(this.analyser);
     this.gain.gain.value = gainValue;
-    this.gain.connect(this.audioContext.destination);
+    this.gain.connect(this.compressor);
+    this.compressor.connect(this.audioContext.destination)
   };
 
   triggerSound = (context, deadline, bufferType, gainValue, instrument) => {
