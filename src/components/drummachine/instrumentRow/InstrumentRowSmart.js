@@ -5,7 +5,8 @@ import { bindActionCreators } from 'redux';
 import {
   toggleStep,
   handleAmplitudeChange,
-  toggleMute
+  toggleMute,
+  handleSoloToggle
 } from '~/ducks/actions/actions';
 
 import InstrumentRow from './InstrumentRow';
@@ -29,18 +30,33 @@ const mapStateToProps = (state, ownProps) => {
     beatSteps: state.drummachine.beatSteps,
     activePart: state.drummachine.activePart,
     mainGain,
-    amplitude: state.drummachine.amplitude
+    amplitude: state.drummachine.amplitude,
+    soloInstruments: state.drummachine.soloInstruments
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { toggleStep, handleAmplitudeChange, toggleMute },
+    { toggleStep, handleAmplitudeChange, toggleMute, handleSoloToggle },
     dispatch
   );
 };
 
 class InstrumentRowSmart extends React.PureComponent {
+  state = {
+    shift: false
+  };
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleShiftPress, false);
+    window.addEventListener('keyup', this.handleShiftUp, false);
+
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleShiftPress, false);
+    window.removeEventListener('keyup', this.handleShiftUp, false);
+  }
+
   toggleStep = (index, volume) => {
     const { part, beatSteps, parts, activePart, instrumentName } = this.props;
 
@@ -94,6 +110,31 @@ class InstrumentRowSmart extends React.PureComponent {
     toggleMute(instrumentName);
   };
 
+  handleSoloToggle = instrumentName => {
+    const { soloInstruments, handleSoloToggle } = this.props;
+    const { shift } = this.state;
+
+    let newSoloInstruments = [];
+
+    shift
+      ? soloInstruments.indexOf(instrumentName) === -1
+        ? (newSoloInstruments = [...soloInstruments, instrumentName])
+        : (newSoloInstruments = [...soloInstruments].filter(
+            instrument => instrument !== instrumentName
+          ))
+      : soloInstruments.indexOf(instrumentName) === -1 &&
+        newSoloInstruments.push(instrumentName);
+    handleSoloToggle(newSoloInstruments);
+  };
+
+  handleShiftPress = e => {
+    e.key === 'Shift' && this.setState({ shift: true });
+  };
+
+  handleShiftUp = () => {
+    this.setState({ shift: false });
+  };
+
   render() {
     const {
       row,
@@ -102,7 +143,8 @@ class InstrumentRowSmart extends React.PureComponent {
       steps,
       parts,
       mainGain,
-      amplitude
+      amplitude,
+      soloInstruments
     } = this.props;
     return (
       <InstrumentRow
@@ -116,6 +158,8 @@ class InstrumentRowSmart extends React.PureComponent {
         changeAmplitude={this.changeAmplitude}
         toggleMute={this.handleToggleMute}
         amplitude={amplitude}
+        handleSoloToggle={this.handleSoloToggle}
+        soloInstruments={soloInstruments}
       />
     );
   }
@@ -133,7 +177,9 @@ InstrumentRowSmart.propTypes = {
   amplitude: PropTypes.object,
   toggleStep: PropTypes.func,
   handleAmplitudeChange: PropTypes.func,
-  toggleMute: PropTypes.func
+  toggleMute: PropTypes.func,
+  handleSoloToggle: PropTypes.func,
+  soloInstruments: PropTypes.array
 };
 
 export default connect(

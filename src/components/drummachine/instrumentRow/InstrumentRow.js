@@ -71,6 +71,24 @@ const styles = theme =>
         width: '10px'
       }
     },
+    soloButton: {
+      border: '1px solid',
+      borderRadius: '50%',
+      minWidth: 'unset',
+      minHeight: 'unset',
+      width: '20px',
+      gridColumn: 1,
+      color: '#D3D3D3',
+      padding: '0',
+      [theme.breakpoints.only('xs')]: {
+        display: 'none'
+      },
+      [theme.breakpoints.only('sm')]: {
+        fontSize: '10px',
+        width: '15px',
+        marginBottom: '1px'
+      }
+    },
     instrumentNameContainer: {
       display: 'flex',
       alignItems: 'center',
@@ -95,12 +113,13 @@ const styles = theme =>
       height: '20px'
     },
     volumeIcons: {
+      fontSize: '20px',
       [theme.breakpoints.only('xs')]: {
         display: 'none'
       },
       [theme.breakpoints.only('sm')]: {
-        fontSize: '12px',
-        width: '10px'
+        fontSize: '15px',
+        width: '17px'
       }
     }
   });
@@ -161,7 +180,9 @@ class InstrumentRow extends React.PureComponent {
       mainGain,
       changeAmplitude,
       toggleMute,
-      amplitude
+      amplitude,
+      handleSoloToggle,
+      soloInstruments
     } = this.props;
 
     let gainValue = amplitude.hasOwnProperty(instrumentName + 'Mute')
@@ -178,19 +199,40 @@ class InstrumentRow extends React.PureComponent {
           }}
           className={classes.volumeControlContainer}
         >
-          <Button
-            onClick={() => toggleMute(instrumentName)}
+          <div
             style={{
-              gridRow: `row ${row} / span 1 `
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
             }}
-            className={classes.muteButton}
           >
-            {gainValue === 0 ? (
-              <VolumeMute classes={{ root: classes.volumeIcons }} />
-            ) : (
-              <VolumeUp classes={{ root: classes.volumeIcons }} />
-            )}
-          </Button>
+            <Button
+              className={classes.soloButton}
+              style={{
+                gridRow: `row ${row} / span 1 `,
+                color:
+                  soloInstruments.indexOf(instrumentName) === -1
+                    ? '#D3D3D3'
+                    : 'red'
+              }}
+              onClick={() => handleSoloToggle(instrumentName)}
+            >
+              S
+            </Button>
+            <Button
+              onClick={() => toggleMute(instrumentName)}
+              style={{
+                gridRow: `row ${row} / span 1 `
+              }}
+              className={classes.muteButton}
+            >
+              {gainValue === 0 ? (
+                <VolumeMute classes={{ root: classes.volumeIcons }} />
+              ) : (
+                <VolumeUp classes={{ root: classes.volumeIcons }} />
+              )}
+            </Button>
+          </div>
           <div className={classes.instrumentNameContainer}>
             <span>{instrumentName}</span>
             <Slider
@@ -251,7 +293,9 @@ InstrumentRow.propTypes = {
   amplitude: PropTypes.object,
   toggleStep: PropTypes.func,
   changeAmplitude: PropTypes.func,
-  toggleMute: PropTypes.func
+  toggleMute: PropTypes.func,
+  handleSoloToggle: PropTypes.func,
+  soloInstruments: PropTypes.array
 };
 
 export default withStyles(styles)(InstrumentRow);

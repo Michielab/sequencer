@@ -7,6 +7,7 @@ export const SET_CURRENT_STEP = 'SET_CURRENT_STEP';
 export const SELECT_PART = 'SELECT_PART';
 export const AMPLITUDE_CHANGE = 'AMPLITUDE_CHANGE';
 export const MUTE_INSTRUMENT = 'MUTE_INSTRUMENT';
+export const HANDLE_SOLO_TOGGLE = 'HANDLE_SOLO_TOGGLE';
 
 export const setCurrentStep = currentStep => ({
   type: 'SET_CURRENT_STEP',
@@ -60,5 +61,12 @@ export const toggleMute = (instrument) => ({
   type: 'MUTE_INSTRUMENT',
   payload: {
     instrument
+  }
+});
+
+export const handleSoloToggle = (selectedSoloInstuments) => ({
+  type: 'HANDLE_SOLO_TOGGLE',
+  payload: {
+    selectedSoloInstuments
   }
 });

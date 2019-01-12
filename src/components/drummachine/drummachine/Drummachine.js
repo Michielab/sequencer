@@ -11,7 +11,7 @@ const styles = theme =>
   createStyles({
     canvas: {
       width: '100%',
-      height: '30%',
+      height: '30%'
     }
   });
 
@@ -24,7 +24,8 @@ const mapStateToProps = state => {
     activePart: state.drummachine.activePart,
     parts: state.drummachine.parts,
     selectedParts: state.drummachine.selectedParts,
-    amplitude: state.drummachine.amplitude
+    amplitude: state.drummachine.amplitude,
+    soloInstruments: state.drummachine.soloInstruments
   };
 };
 
@@ -53,7 +54,6 @@ class Drummachine extends Component {
     this.bufferLength = this.analyser.frequencyBinCount;
     this.dataArray = new Uint8Array(this.bufferLength);
 
-
     this.clock = new WAAClock(this.audioContext);
     sampleLoader('./hihat.wav', this.audioContext, buffer => {
       this.highHatBuffer = buffer;
@@ -78,7 +78,7 @@ class Drummachine extends Component {
     sampleLoader('./bd09.wav', this.audioContext, buffer => {
       this.kickBuffer = buffer;
     });
-      this.draw();
+    this.draw();
   }
 
   componentWillUnmount() {
@@ -86,10 +86,16 @@ class Drummachine extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { playing } = this.props;
+    const { playing, bpm, setCurrentStep } = this.props;
     if (prevProps.playing !== playing) {
-      !playing ? this.stopTickEvent() : this.startTickEvent();
+      // eslint-disable-next-line no-unused-expressions
+      !playing
+        ? this.stopTickEvent()
+        : (setCurrentStep(-1), this.startTickEvent());
       this.audioContext.resume();
+    }
+    if (prevProps.bpm !== bpm && playing) {
+      this.tickEvent.repeat(this.covertBMPtoSeconds(bpm));
     }
   }
 
@@ -102,7 +108,6 @@ class Drummachine extends Component {
 
   startTickEvent = () => {
     const { bpm } = this.props;
-
     this.setState(
       {
         currentStep: -1
@@ -134,7 +139,8 @@ class Drummachine extends Component {
       currentStep,
       setCurrentStep,
       selectedParts,
-      amplitude
+      amplitude,
+      soloInstruments
     } = this.props;
 
     const newCurrentStep = currentStep + 1;
@@ -199,13 +205,24 @@ class Drummachine extends Component {
               : amplitudeValue
             : amplitudeValue;
 
-            this.triggerSound(
-              this.audioContext,
-              deadline,
-              this[buffer],
-              gainValue,
-              instrument
-            );
+          // eslint-disable-next-line no-unused-expressions
+          soloInstruments.length > 0
+            ? soloInstruments.indexOf(instrument) !== -1
+              ? this.triggerSound(
+                  this.audioContext,
+                  deadline,
+                  this[buffer],
+                  gainValue,
+                  instrument
+                )
+              : ''
+            : this.triggerSound(
+                this.audioContext,
+                deadline,
+                this[buffer],
+                gainValue,
+                instrument
+              );
           // instrument === 'kick'
           //   ? triggerKick(this.audioContext, deadline, gainValue, this.analyser)
           //   : this.triggerSound(
@@ -231,7 +248,7 @@ class Drummachine extends Component {
     this.gain.connect(this.analyser);
     this.gain.gain.value = gainValue;
     this.gain.connect(this.compressor);
-    this.compressor.connect(this.audioContext.destination)
+    this.compressor.connect(this.audioContext.destination);
   };
 
   triggerSound = (context, deadline, bufferType, gainValue, instrument) => {
@@ -283,12 +300,7 @@ class Drummachine extends Component {
 
   render() {
     const { classes } = this.props;
-    return (
-      <canvas
-        ref={this.canvasRef}
-        className={classes.canvas}
-      />
-    );
+    return <canvas ref={this.canvasRef} className={classes.canvas} />;
   }
 }
 

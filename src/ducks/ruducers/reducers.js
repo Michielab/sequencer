@@ -7,7 +7,8 @@ import {
   SET_CURRENT_STEP,
   SELECT_PART,
   AMPLITUDE_CHANGE,
-  MUTE_INSTRUMENT
+  MUTE_INSTRUMENT,
+  HANDLE_SOLO_TOGGLE
 } from '~/ducks/actions/actions';
 import { combineReducers } from 'redux';
 
@@ -122,7 +123,8 @@ const audioContextDefaultState = {
   },
   parts: ['partOne', 'partTwo', 'partThree', 'partFour'],
   activePart: 0,
-  selectedParts: ['partOne']
+  selectedParts: ['partOne'],
+  soloInstruments: []
 };
 
 const drummachine = (state = audioContextDefaultState, action) => {
@@ -192,6 +194,11 @@ const drummachine = (state = audioContextDefaultState, action) => {
           ...state.amplitude,
           [action.payload.instrument + 'Mute']: mute
         }
+      };
+    case HANDLE_SOLO_TOGGLE:
+      return {
+        ...state,
+        soloInstruments: [...action.payload.selectedSoloInstuments]
       };
     default:
       return state;

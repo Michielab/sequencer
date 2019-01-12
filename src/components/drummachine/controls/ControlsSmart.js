@@ -35,6 +35,20 @@ const mapDispatchToProps = dispatch => {
 };
 
 class ControlsSmart extends Component {
+  componentDidMount() {
+    window.addEventListener('keypress', this.handleKeyPress, false);
+  }
+
+  componentWillMount() {
+    window.removeEventListener('keypress', this.handleKeyPress, false);
+  }
+
+  handleKeyPress = e => {
+    if (e.code === 'Space') {
+      this.props.togglePlay();
+    }
+  };
+
   /* method to clear all the steps */
   handleClearAll = () => {
     let { beatSteps } = this.props;
@@ -58,7 +72,7 @@ class ControlsSmart extends Component {
   toggleParts = index => {
     const { selectPart, selectedParts, parts, activePart } = this.props;
     let newSelectedParts = selectedParts;
-     // eslint-disable-next-line 
+    // eslint-disable-next-line
     selectedParts.indexOf(parts[index]) !== -1 &&
     parts[activePart] === parts[index]
       ? (newSelectedParts = newSelectedParts.filter(

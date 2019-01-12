@@ -243,7 +243,7 @@ class Controls extends Component {
                 activePart === index && currentStepPart === index
                   ? 'rgba(255, 255, 255, 0.8)'
                   : currentStepPart === index
-                  ? '#0C8330'
+                  ? '# 0C8330'
                   : activePart === index &&
                     selectedParts.indexOf(parts[index]) !== -1
                   ? 'rgba(255, 255, 255, 0.8)'
