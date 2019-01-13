@@ -124,7 +124,7 @@ const audioContextDefaultState = {
   parts: ['partOne', 'partTwo', 'partThree', 'partFour'],
   activePart: 0,
   selectedParts: ['partOne'],
-  soloInstruments: []
+  soloInstruments: [],
 };
 
 const drummachine = (state = audioContextDefaultState, action) => {
@@ -137,7 +137,7 @@ const drummachine = (state = audioContextDefaultState, action) => {
     case TOGGLE_STEP:
       return {
         ...state,
-        beatSteps: action.payload.newSteps
+        beatSteps: action.payload.newSteps,
       };
     case TOGGLE_PLAY:
       return {

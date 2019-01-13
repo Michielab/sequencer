@@ -47,14 +47,13 @@ class InstrumentRowSmart extends React.PureComponent {
     shift: false
   };
   componentDidMount() {
-    window.addEventListener('keydown', this.handleShiftPress, false);
-    window.addEventListener('keyup', this.handleShiftUp, false);
-
+    window.addEventListener('keydown', this.handleShiftPress, true);
+    window.addEventListener('keyup', this.handleShiftUp, true);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleShiftPress, false);
-    window.removeEventListener('keyup', this.handleShiftUp, false);
+    window.removeEventListener('keydown', this.handleShiftPress, true);
+    window.removeEventListener('keyup', this.handleShiftUp, true);
   }
 
   toggleStep = (index, volume) => {
@@ -128,7 +127,8 @@ class InstrumentRowSmart extends React.PureComponent {
   };
 
   handleShiftPress = e => {
-    e.key === 'Shift' && this.setState({ shift: true });
+    // eslint-disable-next-line no-unused-expressions
+    e.key === 'Shift' && this.setState({ shift: true, keyPressed: true });
   };
 
   handleShiftUp = () => {

@@ -61,6 +61,61 @@ const styles = theme => ({
       justifySelf: 'left'
     }
   },
+  swingLabel: {
+    color: 'white',
+    marginRight: '5px',
+    gridColumn: 4,
+    gridRow: 3,
+    textAlign: 'center',
+    marginTop: '4px',
+    [theme.breakpoints.only('xs')]: {
+      fontSize: '8px',
+      alignSelf: 'center',
+      gridColumn: '4 / 5',
+    },
+    [theme.breakpoints.only('sm')]: {
+      textAlign: 'left',
+      fontSize: '13px',
+      justifySelf: 'center'
+    },
+    [theme.breakpoints.only('md')]: {
+      textAlign: 'left',
+      fontSize: '13px'
+    }
+  },
+  swingInput: {
+    gridColumn: 4,
+    gridRow: 3,
+    height: '20px',
+    backgroundColor: ' #212121',
+    border: '2px solid',
+    color: 'rgba(255, 255, 255, 0.8)',
+    borderRadius: '4px',
+    textAlign: 'center',
+    outline: 'initial !important',
+    width: 'calc(100% - 6px)',
+    [theme.breakpoints.only('xs')]: {
+      gridColumn: '5 / 7',
+      alignSelf: 'center',
+      borderWidth: '1px',
+      height: '15px',
+      width: '35px'
+    },
+    [theme.breakpoints.only('sm')]: {
+      marginRight: 0,
+      gridColumn: '5 / 7',
+      width: '40px',
+      borderWidth: '1px',
+      justifySelf: 'left'
+    },
+    [theme.breakpoints.only('md')]: {
+      marginRight: 0,
+      gridColumn: '5 / 7',
+      width: '40px',
+      borderWidth: '1px',
+      justifySelf: 'left'
+    }
+  },
   playButton: {
     gridColumn: 16,
     gridRow: 3,
@@ -189,7 +244,9 @@ class Controls extends Component {
       activePart,
       selectedParts,
       steps,
-      currentStep
+      currentStep,
+      swing,
+      handleSwingChange
     } = this.props;
 
     let currentStepPart;
@@ -228,6 +285,15 @@ class Controls extends Component {
           onChange={handleBPMChange}
           className={classes.BPMinput}
         />
+        {/* <label className={classes.swingLabel}>Swing</label>
+        <input
+          min={0}
+          max={10}
+          value={swing}
+          type="number"
+          onChange={handleSwingChange}
+          className={classes.swingInput}
+        /> */}
         {parts.map((part, index) => (
           <Button
             key={index}

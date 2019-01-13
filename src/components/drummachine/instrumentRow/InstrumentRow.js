@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles, createStyles, Button } from '@material-ui/core';
 import { Slider } from 'material-ui-slider';
 import { VolumeMute, VolumeUp } from '@material-ui/icons/';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme =>
   createStyles({
@@ -206,32 +207,45 @@ class InstrumentRow extends React.PureComponent {
               alignItems: 'center'
             }}
           >
-            <Button
-              className={classes.soloButton}
-              style={{
-                gridRow: `row ${row} / span 1 `,
-                color:
-                  soloInstruments.indexOf(instrumentName) === -1
-                    ? '#D3D3D3'
-                    : 'red'
-              }}
-              onClick={() => handleSoloToggle(instrumentName)}
+            <Tooltip
+              title="Hold shift to select multiple"
+              placement="top"
+              leaveDelay={1}
+              interactive={true}
             >
-              S
-            </Button>
-            <Button
-              onClick={() => toggleMute(instrumentName)}
-              style={{
-                gridRow: `row ${row} / span 1 `
-              }}
-              className={classes.muteButton}
+              <Button
+                className={classes.soloButton}
+                style={{
+                  gridRow: `row ${row} / span 1 `,
+                  color:
+                    soloInstruments.indexOf(instrumentName) === -1
+                      ? '#D3D3D3'
+                      : 'red'
+                }}
+                onMouseDown={() => handleSoloToggle(instrumentName)}
+              >
+                S
+              </Button>
+            </Tooltip>
+            <Tooltip
+              title="You can also control the volume per step. 
+              Move up or down while holding the mouse key on a step"
+              placement="top"
             >
-              {gainValue === 0 ? (
-                <VolumeMute classes={{ root: classes.volumeIcons }} />
-              ) : (
-                <VolumeUp classes={{ root: classes.volumeIcons }} />
-              )}
-            </Button>
+              <Button
+                style={{
+                  gridRow: `row ${row} / span 1 `
+                }}
+                className={classes.muteButton}
+                onMouseDown={() => toggleMute(instrumentName)}
+              >
+                {gainValue === 0 ? (
+                  <VolumeMute classes={{ root: classes.volumeIcons }} />
+                ) : (
+                  <VolumeUp classes={{ root: classes.volumeIcons }} />
+                )}
+              </Button>
+            </Tooltip>
           </div>
           <div className={classes.instrumentNameContainer}>
             <span>{instrumentName}</span>
