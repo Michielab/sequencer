@@ -207,45 +207,33 @@ class InstrumentRow extends React.PureComponent {
               alignItems: 'center'
             }}
           >
-            <Tooltip
-              title="Hold shift to select multiple"
-              placement="top"
-              leaveDelay={1}
-              interactive={true}
+            <Button
+              className={classes.soloButton}
+              style={{
+                gridRow: `row ${row} / span 1 `,
+                color:
+                  soloInstruments.indexOf(instrumentName) === -1
+                    ? '#D3D3D3'
+                    : 'red'
+              }}
+              onMouseDown={() => handleSoloToggle(instrumentName)}
             >
-              <Button
-                className={classes.soloButton}
-                style={{
-                  gridRow: `row ${row} / span 1 `,
-                  color:
-                    soloInstruments.indexOf(instrumentName) === -1
-                      ? '#D3D3D3'
-                      : 'red'
-                }}
-                onMouseDown={() => handleSoloToggle(instrumentName)}
-              >
-                S
-              </Button>
-            </Tooltip>
-            <Tooltip
-              title="You can also control the volume per step. 
-              Move up or down while holding the mouse key on a step"
-              placement="top"
+              S
+            </Button>
+
+            <Button
+              style={{
+                gridRow: `row ${row} / span 1 `
+              }}
+              className={classes.muteButton}
+              onMouseDown={() => toggleMute(instrumentName)}
             >
-              <Button
-                style={{
-                  gridRow: `row ${row} / span 1 `
-                }}
-                className={classes.muteButton}
-                onMouseDown={() => toggleMute(instrumentName)}
-              >
-                {gainValue === 0 ? (
-                  <VolumeMute classes={{ root: classes.volumeIcons }} />
-                ) : (
-                  <VolumeUp classes={{ root: classes.volumeIcons }} />
-                )}
-              </Button>
-            </Tooltip>
+              {gainValue === 0 ? (
+                <VolumeMute classes={{ root: classes.volumeIcons }} />
+              ) : (
+                <VolumeUp classes={{ root: classes.volumeIcons }} />
+              )}
+            </Button>
           </div>
           <div className={classes.instrumentNameContainer}>
             <span>{instrumentName}</span>
