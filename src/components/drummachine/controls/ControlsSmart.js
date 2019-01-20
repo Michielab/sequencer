@@ -8,7 +8,8 @@ import {
   togglePlay,
   handleBPMChange,
   handleClearAll as handleClearAllAction,
-  selectPart
+  selectPart,
+  handleSwing
 } from '~/ducks/actions/actions';
 
 /* Imports components */
@@ -23,13 +24,14 @@ const mapStateToProps = state => {
     activePart: state.drummachine.activePart,
     selectedParts: state.drummachine.selectedParts,
     steps: state.drummachine.beatSteps.steps,
-    currentStep: state.drummachine.drummachine.currentStep
+    currentStep: state.drummachine.drummachine.currentStep,
+    swing: state.drummachine.drummachine.swing
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { togglePlay, handleBPMChange, handleClearAllAction, selectPart },
+    { togglePlay, handleBPMChange, handleClearAllAction, selectPart, handleSwing },
     dispatch
   );
 };
@@ -95,7 +97,9 @@ class ControlsSmart extends Component {
       activePart,
       selectedParts,
       currentStep,
-      steps
+      steps,
+      swing,
+      handleSwing
     } = this.props;
 
     return (
@@ -111,6 +115,8 @@ class ControlsSmart extends Component {
         selectedParts={selectedParts}
         currentStep={currentStep}
         steps={steps}
+        swing={swing}
+        handleSwing={handleSwing}
       />
     );
   }
@@ -129,7 +135,8 @@ ControlsSmart.propTypes = {
   handleBPMChange: PropTypes.func,
   togglePlay: PropTypes.func,
   handleClearAllAction: PropTypes.func,
-  selectPart: PropTypes.func
+  selectPart: PropTypes.func,
+  swing: PropTypes.number
 };
 
 export default connect(

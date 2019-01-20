@@ -8,7 +8,8 @@ import {
   SELECT_PART,
   AMPLITUDE_CHANGE,
   MUTE_INSTRUMENT,
-  HANDLE_SOLO_TOGGLE
+  HANDLE_SOLO_TOGGLE,
+  HANDLE_SWING_CHANGE
 } from '~/ducks/actions/actions';
 import { combineReducers } from 'redux';
 
@@ -16,7 +17,8 @@ const audioContextDefaultState = {
   drummachine: {
     playing: false,
     bpm: 130,
-    currentStep: 0
+    currentStep: 0,
+    swing: 0
   },
   beatSteps: {
     steps: [
@@ -200,6 +202,15 @@ const drummachine = (state = audioContextDefaultState, action) => {
         ...state,
         soloInstruments: [...action.payload.selectedSoloInstuments]
       };
+    case HANDLE_SWING_CHANGE:
+    console.log(action.payload.swing)
+      return {
+        ...state,
+        drummachine: {
+          ...state.drummachine,
+          swing: action.payload.swing
+        }
+      }  
     default:
       return state;
   }

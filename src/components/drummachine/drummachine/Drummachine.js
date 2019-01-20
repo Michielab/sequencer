@@ -25,7 +25,8 @@ const mapStateToProps = state => {
     parts: state.drummachine.parts,
     selectedParts: state.drummachine.selectedParts,
     amplitude: state.drummachine.amplitude,
-    soloInstruments: state.drummachine.soloInstruments
+    soloInstruments: state.drummachine.soloInstruments,
+    swing: state.drummachine.drummachine.swing
   };
 };
 
@@ -140,9 +141,11 @@ class Drummachine extends Component {
       setCurrentStep,
       selectedParts,
       amplitude,
-      soloInstruments
+      soloInstruments,
+      swing,
+      bpm
     } = this.props;
-
+    let newDeadLine = deadline;
     const newCurrentStep = currentStep + 1;
     let steps = [
       { step: 0, amplitude: 100 },
@@ -205,12 +208,16 @@ class Drummachine extends Component {
               : amplitudeValue
             : amplitudeValue;
 
+          if (swing > 0 && newCurrentStep % 2 === 1) {
+            newDeadLine = newDeadLine + ((this.covertBMPtoSeconds(bpm) / 20) * swing);
+          }
+
           // eslint-disable-next-line no-unused-expressions
           soloInstruments.length > 0
             ? soloInstruments.indexOf(instrument) !== -1
               ? this.triggerSound(
                   this.audioContext,
-                  deadline,
+                  newDeadLine,
                   this[buffer],
                   gainValue,
                   instrument
@@ -218,11 +225,12 @@ class Drummachine extends Component {
               : ''
             : this.triggerSound(
                 this.audioContext,
-                deadline,
+                newDeadLine,
                 this[buffer],
                 gainValue,
                 instrument
               );
+
           // instrument === 'kick'
           //   ? triggerKick(this.audioContext, deadline, gainValue, this.analyser)
           //   : this.triggerSound(

@@ -13,6 +13,7 @@ const styles = theme => ({
     gridRow: 3,
     textAlign: 'center',
     marginTop: '4px',
+    marginBottom: '5px',
     [theme.breakpoints.only('xs')]: {
       fontSize: '8px',
       alignSelf: 'center'
@@ -39,6 +40,7 @@ const styles = theme => ({
     textAlign: 'center',
     outline: 'initial !important',
     width: 'calc(100% - 6px)',
+    marginBottom: '5px',
     [theme.breakpoints.only('xs')]: {
       gridColumn: '2 / 4',
       alignSelf: 'center',
@@ -64,23 +66,26 @@ const styles = theme => ({
   swingLabel: {
     color: 'white',
     marginRight: '5px',
-    gridColumn: 4,
+    gridColumn: 3,
     gridRow: 3,
-    textAlign: 'center',
+    textAlign: 'right',
     marginTop: '4px',
+    marginBottom: '5px',
     [theme.breakpoints.only('xs')]: {
       fontSize: '8px',
       alignSelf: 'center',
-      gridColumn: '4 / 5',
+      gridColumn: '4 / 6',
     },
     [theme.breakpoints.only('sm')]: {
       textAlign: 'left',
       fontSize: '13px',
-      justifySelf: 'center'
+      justifySelf: 'right',
+      gridColumn: '3 / 5'
     },
     [theme.breakpoints.only('md')]: {
-      textAlign: 'left',
-      fontSize: '13px'
+      textAlign: 'right',
+      fontSize: '13px',
+      gridColumn: '3 / 5'
     }
   },
   swingInput: {
@@ -94,12 +99,14 @@ const styles = theme => ({
     textAlign: 'center',
     outline: 'initial !important',
     width: 'calc(100% - 6px)',
+    marginBottom: '5px',
     [theme.breakpoints.only('xs')]: {
-      gridColumn: '5 / 7',
+      gridColumn: '6 / 8',
       alignSelf: 'center',
       borderWidth: '1px',
       height: '15px',
-      width: '35px'
+      width: '28px',
+      fontSize: '8px',
     },
     [theme.breakpoints.only('sm')]: {
       marginRight: 0,
@@ -145,7 +152,7 @@ const styles = theme => ({
       height: '30px',
       marginBottom: '10px',
       borderWidth: '1px',
-      justifySelf: 'center'
+      justifySelf: 'right'
     },
     [theme.breakpoints.only('md')]: {
       width: '100%',
@@ -208,7 +215,7 @@ const styles = theme => ({
       minHeight: 'unset',
       height: '25px',
       borderWidth: '1px',
-      justifySelf: 'center'
+      justifySelf: 'left'
     },
     [theme.breakpoints.only('sm')]: {
       width: '40px',
@@ -246,7 +253,7 @@ class Controls extends Component {
       steps,
       currentStep,
       swing,
-      handleSwingChange
+      handleSwing
     } = this.props;
 
     let currentStepPart;
@@ -285,15 +292,15 @@ class Controls extends Component {
           onChange={handleBPMChange}
           className={classes.BPMinput}
         />
-        {/* <label className={classes.swingLabel}>Swing</label>
+        <label className={classes.swingLabel}>Swing</label>
         <input
           min={0}
           max={10}
           value={swing}
           type="number"
-          onChange={handleSwingChange}
+          onChange={(e) => handleSwing(parseInt(e.target.value))}
           className={classes.swingInput}
-        /> */}
+        />
         {parts.map((part, index) => (
           <Button
             key={index}
