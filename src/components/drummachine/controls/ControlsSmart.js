@@ -9,7 +9,8 @@ import {
   handleBPMChange,
   handleClearAll as handleClearAllAction,
   selectPart,
-  handleSwing
+  handleSwing,
+  handleCopyPart
 } from '~/ducks/actions/actions';
 
 /* Imports components */
@@ -31,7 +32,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { togglePlay, handleBPMChange, handleClearAllAction, selectPart, handleSwing },
+    {
+      togglePlay,
+      handleBPMChange,
+      handleClearAllAction,
+      selectPart,
+      handleSwing,
+      handleCopyPart
+    },
     dispatch
   );
 };
@@ -72,7 +80,14 @@ class ControlsSmart extends Component {
   };
 
   toggleParts = index => {
-    const { selectPart, selectedParts, parts, activePart } = this.props;
+    const {
+      selectPart,
+      selectedParts,
+      parts,
+      activePart,
+      beatSteps,
+      handleCopyPart
+    } = this.props;
     let newSelectedParts = selectedParts;
     // eslint-disable-next-line
     selectedParts.indexOf(parts[index]) !== -1 &&
@@ -83,6 +98,11 @@ class ControlsSmart extends Component {
       : selectedParts.indexOf(parts[index]) !== -1
       ? ''
       : newSelectedParts.push(parts[index]);
+
+    // eslint-disable-next-line no-unused-expressions
+    index !== 0 &&
+      Object.keys(beatSteps[parts[index]]).length === 1 &&
+      handleCopyPart(beatSteps[parts[index - 1]], parts[index]);
 
     selectPart(index, newSelectedParts);
   };

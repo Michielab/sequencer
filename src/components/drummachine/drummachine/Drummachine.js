@@ -92,7 +92,7 @@ class Drummachine extends Component {
       // eslint-disable-next-line no-unused-expressions
       !playing
         ? (setCurrentStep(0), this.stopTickEvent())
-        : this.startTickEvent();
+        : (setCurrentStep(-1), this.startTickEvent())
       this.audioContext.resume();
     }
     if (prevProps.bpm !== bpm && playing) {

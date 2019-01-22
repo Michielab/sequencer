@@ -9,7 +9,8 @@ import {
   AMPLITUDE_CHANGE,
   MUTE_INSTRUMENT,
   HANDLE_SOLO_TOGGLE,
-  HANDLE_SWING_CHANGE
+  HANDLE_SWING_CHANGE,
+  HANDLE_COPY_PART
 } from '~/ducks/actions/actions';
 import { combineReducers } from 'redux';
 
@@ -203,7 +204,6 @@ const drummachine = (state = audioContextDefaultState, action) => {
         soloInstruments: [...action.payload.selectedSoloInstuments]
       };
     case HANDLE_SWING_CHANGE:
-    console.log(action.payload.swing)
       return {
         ...state,
         drummachine: {
@@ -211,6 +211,14 @@ const drummachine = (state = audioContextDefaultState, action) => {
           swing: action.payload.swing
         }
       }  
+    case HANDLE_COPY_PART:
+    return {
+      ...state,
+      beatSteps: {
+        ...state.beatSteps,
+        [action.payload.currentPart]: {...action.payload.part}
+      }
+    }  
     default:
       return state;
   }
