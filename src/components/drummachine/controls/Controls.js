@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 /* Imports Material-ui */
 import { withStyles, Button } from '@material-ui/core';
 import { PlayArrow, Stop, ClearAll } from '@material-ui/icons/';
+import { Slider } from 'material-ui-slider';
 
 const styles = theme => ({
   label: {
@@ -74,7 +75,7 @@ const styles = theme => ({
     [theme.breakpoints.only('xs')]: {
       fontSize: '8px',
       alignSelf: 'center',
-      gridColumn: '4 / 6',
+      gridColumn: '4 / 6'
     },
     [theme.breakpoints.only('sm')]: {
       textAlign: 'left',
@@ -106,7 +107,7 @@ const styles = theme => ({
       borderWidth: '1px',
       height: '15px',
       width: '28px',
-      fontSize: '8px',
+      fontSize: '8px'
     },
     [theme.breakpoints.only('sm')]: {
       marginRight: 0,
@@ -234,6 +235,73 @@ const styles = theme => ({
     [theme.breakpoints.up('lg')]: {
       marginBottom: '30px'
     }
+  },
+  knob: {
+    position: 'relative',
+    display: 'inline-block',
+    width: '50px',
+    height: '50px',
+    backgroundColor: '#6b6b6b',
+    borderRadius: '50%',
+    boxShadow: 'inset -2px 2px 0px 0px rgba(#fff, 0.1)'
+    // inset 2px -2px 0px 0px rgba(#111, 0.2)
+    // -5px 5px 5px 0px #111,
+    // -10px 10px 10px -5px #111,
+    // -20px 20px 20px -10px #111,
+    // -25px 25px 25px -10px #111'
+  },
+  knobAfter: {
+    position: 'absolute',
+    top: '50%',
+    left: '75%',
+    width: ' 25%',
+    height: ' 4px',
+    marginTop: '-2px',
+    backgroundColor: '#fefefe',
+    bordeRadius: '2px',
+    transition: 'all 200ms ease-in-out',
+    transformOrigin: '-100% 50%',
+    boxShadow: '1px -1px 0px 0px rgba(#111, 0.2)',
+    content: ''
+  },
+  filter: {
+    display: 'none',
+
+    [theme.breakpoints.up('lg')]: {
+      display: 'unset',
+      gridColumn: '5 / 6',
+      gridRow: '3',
+      textAlign: 'right',
+      marginTop: '4px',
+      marginBottom: '5px',
+      color: 'white',
+      marginRight: '5px',
+
+    }  
+  },
+  slider: {
+    display: 'none',
+    [theme.breakpoints.only('md')]: {
+      // width: '100%',
+      // minWidth: '40px',
+      // marginBottom: '15px'
+    },
+    [theme.breakpoints.up('lg')]: {
+      display: 'unset',
+      gridColumn: '6 / 7',
+      gridRow: '3',
+      marginLeft: '5px'
+    }  
+  },
+  warpSlider: {
+    [theme.breakpoints.only('md')]: {
+      // width: '100%',
+      // minWidth: '40px',
+      // marginBottom: '15px'
+    },
+    [theme.breakpoints.up('lg')]: {
+      top: '-9px'
+    }  
   }
 });
 
@@ -253,7 +321,13 @@ class Controls extends Component {
       steps,
       currentStep,
       swing,
-      handleSwing
+      handleSwing,
+      setValueEffect,
+      setTypeOfEffect,
+      toggleMousePress,
+      effects,
+      handleMouseLeave,
+      setKnobRef
     } = this.props;
 
     let currentStepPart;
@@ -298,7 +372,7 @@ class Controls extends Component {
           max={10}
           value={swing}
           type="number"
-          onChange={(e) => handleSwing(parseInt(e.target.value))}
+          onChange={e => handleSwing(parseInt(e.target.value))}
           className={classes.swingInput}
         />
         {parts.map((part, index) => (
@@ -336,6 +410,39 @@ class Controls extends Component {
             {index + 1}
           </Button>
         ))}
+          {/* <div
+            className={classes.knob}
+            onMouseDown={toggleMousePress}
+            onMouseUp={handleMouseLeave}
+            onMouseLeave={handleMouseLeave}
+            onMouseMove={(e) => {setValueEffect(e.clientX, e.clientY)}}
+            ref={setKnobRef}
+          >
+            <div
+              className={classes.knobAfter}
+              style={{
+                transform: `rotate(${-220 + effects.currentLevel * 30}deg)`
+              }}
+            />
+          </div> */}
+           <label className={classes.filter}>Filter</label>
+          <div className={ classes.slider}>
+          <Slider
+              style={{ width: '100%', height: '20px' }}
+              classes={{
+                trackContainer: classes.slider,
+                warp: classes.warpSlider,
+                pointer: classes.sliderPointer
+              }}
+              min={0}
+              max={10}
+              value={effects.currentValue}
+              onChange={value => setValueEffect(value)}
+              componentPropType="span"
+            />
+
+          </div>
+
         <Button
           onClick={() => togglePlay()}
           classes={{ root: classes.playButton }}

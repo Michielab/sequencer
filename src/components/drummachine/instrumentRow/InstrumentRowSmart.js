@@ -49,11 +49,17 @@ class InstrumentRowSmart extends React.PureComponent {
   componentDidMount() {
     window.addEventListener('keydown', this.handleShiftPress, true);
     window.addEventListener('keyup', this.handleShiftUp, true);
+    if (this.props.baseRow) {
+      window.addEventListener('keypress', this.handleKeyPress, true);
+    }
   }
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleShiftPress, true);
     window.removeEventListener('keyup', this.handleShiftUp, true);
+    if (this.props.baseRow) {
+      window.removeEventListener('keypress', this.handleKeyPress, true);
+    }
   }
 
   toggleStep = (index, volume) => {
@@ -112,6 +118,7 @@ class InstrumentRowSmart extends React.PureComponent {
   handleSoloToggle = instrumentName => {
     const { soloInstruments, handleSoloToggle } = this.props;
     const { shift } = this.state;
+    console.log(shift);
 
     let newSoloInstruments = [];
 
@@ -123,6 +130,7 @@ class InstrumentRowSmart extends React.PureComponent {
           ))
       : soloInstruments.indexOf(instrumentName) === -1 &&
         newSoloInstruments.push(instrumentName);
+    console.log(newSoloInstruments);
     handleSoloToggle(newSoloInstruments);
   };
 
@@ -133,6 +141,28 @@ class InstrumentRowSmart extends React.PureComponent {
 
   handleShiftUp = () => {
     this.setState({ shift: false });
+  };
+
+  handleKeyPress = e => {
+    console.log(e);
+    const instrumentsNames = {
+      Digit1: 'ride',
+      Digit2: 'highHat',
+      Digit3: 'mt',
+      Digit4: 'snare',
+      Digit5: 'clap',
+      Digit6: 'kick'
+    };
+
+    if (Object.keys(instrumentsNames).indexOf(e.code) !== -1) {
+      if (e.shiftKey === true && !this.state.shift) {
+        this.setState({ shift: true });
+      }
+
+      e.ctrlKey
+        ? this.handleToggleMute(instrumentsNames[e.code])
+        : this.handleSoloToggle(instrumentsNames[e.code]);
+    }
   };
 
   render() {

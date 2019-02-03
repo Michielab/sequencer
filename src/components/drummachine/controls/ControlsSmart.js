@@ -10,7 +10,10 @@ import {
   handleClearAll as handleClearAllAction,
   selectPart,
   handleSwing,
-  handleCopyPart
+  handleCopyPart,
+  handleEffectChange,
+  handleValueEffectChange,
+  handleSoloToggle
 } from '~/ducks/actions/actions';
 
 /* Imports components */
@@ -26,7 +29,8 @@ const mapStateToProps = state => {
     selectedParts: state.drummachine.selectedParts,
     steps: state.drummachine.beatSteps.steps,
     currentStep: state.drummachine.drummachine.currentStep,
-    swing: state.drummachine.drummachine.swing
+    swing: state.drummachine.drummachine.swing,
+    effects: state.drummachine.effects
   };
 };
 
@@ -38,13 +42,20 @@ const mapDispatchToProps = dispatch => {
       handleClearAllAction,
       selectPart,
       handleSwing,
-      handleCopyPart
+      handleCopyPart,
+      handleEffectChange,
+      handleValueEffectChange,
+      handleSoloToggle
     },
     dispatch
   );
 };
 
 class ControlsSmart extends Component {
+  state = {
+    mousePressed: false,
+    knob: undefined
+  }
   componentDidMount() {
     window.addEventListener('keypress', this.handleKeyPress, false);
   }
@@ -56,6 +67,15 @@ class ControlsSmart extends Component {
   handleKeyPress = e => {
     if (e.code === 'Space') {
       this.props.togglePlay();
+    }
+
+    if(e.code === 'KeyF') {
+      this.props.handleEffectChange(!this.props.effects.active)
+    }
+
+    if(e.code === 'KeyQ') {
+      this.props.handleEffectChange(false)
+      this.props.handleSoloToggle([])
     }
   };
 
@@ -107,7 +127,23 @@ class ControlsSmart extends Component {
     selectPart(index, newSelectedParts);
   };
 
+  setTypeOfEffect = (effect) => {
+    this.props.handleEffectChange(effect)
+  }
+
+  setValueEffect = (effectValue) => {
+    // const { mousePositionX, knob } = this.state;
+    // console.log('e', knob.getBoundingClientRect(), mousePositionX,  clientX, clientY)
+    // const knobPositionX = knob.getBoundingClientRect().x; // 0%
+    // const knobWidth = knob.getBoundingClientRect().width
+    // const maxXpostion = knobPositionX + knobWidth; // 100%
+    // console.log(clientX / maxXpostion * 100)
+    this.props.handleValueEffectChange(effectValue)
+  }
+
+
   render() {
+    console.log(this.props)
     const {
       handleBPMChange,
       togglePlay,
@@ -119,7 +155,8 @@ class ControlsSmart extends Component {
       currentStep,
       steps,
       swing,
-      handleSwing
+      handleSwing,
+      effects
     } = this.props;
 
     return (
@@ -137,6 +174,9 @@ class ControlsSmart extends Component {
         steps={steps}
         swing={swing}
         handleSwing={handleSwing}
+        effects={effects}
+        setTypeOfEffect={this.setTypeOfEffect}
+        setValueEffect={this.setValueEffect}
       />
     );
   }
@@ -156,7 +196,8 @@ ControlsSmart.propTypes = {
   togglePlay: PropTypes.func,
   handleClearAllAction: PropTypes.func,
   selectPart: PropTypes.func,
-  swing: PropTypes.number
+  swing: PropTypes.number,
+  effects: PropTypes.object
 };
 
 export default connect(

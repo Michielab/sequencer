@@ -10,7 +10,9 @@ import {
   MUTE_INSTRUMENT,
   HANDLE_SOLO_TOGGLE,
   HANDLE_SWING_CHANGE,
-  HANDLE_COPY_PART
+  HANDLE_COPY_PART,
+  HANDLE_EFFECT_CHANGE,
+  HANDLE_VALUE_EFFECT_CHANGE
 } from '~/ducks/actions/actions';
 import { combineReducers } from 'redux';
 
@@ -125,9 +127,14 @@ const audioContextDefaultState = {
     mainGain: 50
   },
   parts: ['partOne', 'partTwo', 'partThree', 'partFour'],
+  effects: {
+    active: true,
+    levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    currentLevel: 0
+  },
   activePart: 0,
   selectedParts: ['partOne'],
-  soloInstruments: [],
+  soloInstruments: []
 };
 
 const drummachine = (state = audioContextDefaultState, action) => {
@@ -140,7 +147,7 @@ const drummachine = (state = audioContextDefaultState, action) => {
     case TOGGLE_STEP:
       return {
         ...state,
-        beatSteps: action.payload.newSteps,
+        beatSteps: action.payload.newSteps
       };
     case TOGGLE_PLAY:
       return {
@@ -210,15 +217,31 @@ const drummachine = (state = audioContextDefaultState, action) => {
           ...state.drummachine,
           swing: action.payload.swing
         }
-      }  
+      };
     case HANDLE_COPY_PART:
-    return {
-      ...state,
-      beatSteps: {
-        ...state.beatSteps,
-        [action.payload.currentPart]: {...action.payload.part}
-      }
-    }  
+      return {
+        ...state,
+        beatSteps: {
+          ...state.beatSteps,
+          [action.payload.currentPart]: { ...action.payload.part }
+        }
+      };
+    case HANDLE_EFFECT_CHANGE:
+      return {
+        ...state,
+        effects: {
+          ...state.effects,
+          active: action.payload.effect
+        }
+      };
+    case HANDLE_VALUE_EFFECT_CHANGE:
+      return {
+        ...state,
+        effects: {
+          ...state.effects,
+          currentLevel: action.payload.effectValue
+        }
+      };
     default:
       return state;
   }

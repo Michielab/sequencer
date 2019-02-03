@@ -10,6 +10,8 @@ export const MUTE_INSTRUMENT = 'MUTE_INSTRUMENT';
 export const HANDLE_SOLO_TOGGLE = 'HANDLE_SOLO_TOGGLE';
 export const HANDLE_SWING_CHANGE = 'HANDLE_SWING_CHANGE';
 export const HANDLE_COPY_PART = 'HANDLE_COPY_PART';
+export const HANDLE_EFFECT_CHANGE = 'HANDLE_EFFECT_CHANGE';
+export const HANDLE_VALUE_EFFECT_CHANGE = 'HANDLE_VALUE_EFFECT_CHANGE';
 
 export const setCurrentStep = currentStep => ({
   type: 'SET_CURRENT_STEP',
@@ -85,5 +87,19 @@ export const handleCopyPart = (part, currentPart) => ({
   payload: {
     part,
     currentPart
+  }
+});
+
+export const handleEffectChange = (effect) => ({
+  type: 'HANDLE_EFFECT_CHANGE',
+  payload: {
+    effect
+  }
+});
+
+export const handleValueEffectChange = (effectValue) => ({
+  type: 'HANDLE_VALUE_EFFECT_CHANGE',
+  payload: {
+  effectValue
   }
 });
