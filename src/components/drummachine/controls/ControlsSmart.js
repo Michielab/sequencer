@@ -13,7 +13,8 @@ import {
   handleCopyPart,
   handleEffectChange,
   handleValueEffectChange,
-  handleSoloToggle
+  handleSoloToggle,
+  handleDelayChange
 } from '~/ducks/actions/actions';
 
 /* Imports components */
@@ -30,7 +31,8 @@ const mapStateToProps = state => {
     steps: state.drummachine.beatSteps.steps,
     currentStep: state.drummachine.drummachine.currentStep,
     swing: state.drummachine.drummachine.swing,
-    effects: state.drummachine.effects
+    effects: state.drummachine.effects,
+    delay: state.drummachine.delay
   };
 };
 
@@ -45,7 +47,8 @@ const mapDispatchToProps = dispatch => {
       handleCopyPart,
       handleEffectChange,
       handleValueEffectChange,
-      handleSoloToggle
+      handleSoloToggle,
+      handleDelayChange
     },
     dispatch
   );
@@ -55,7 +58,7 @@ class ControlsSmart extends Component {
   state = {
     mousePressed: false,
     knob: undefined
-  }
+  };
   componentDidMount() {
     window.addEventListener('keypress', this.handleKeyPress, false);
   }
@@ -69,13 +72,13 @@ class ControlsSmart extends Component {
       this.props.togglePlay();
     }
 
-    if(e.code === 'KeyF') {
-      this.props.handleEffectChange(!this.props.effects.active)
+    if (e.code === 'KeyF') {
+      this.props.handleEffectChange(!this.props.effects.active);
     }
 
-    if(e.code === 'KeyQ') {
-      this.props.handleEffectChange(false)
-      this.props.handleSoloToggle([])
+    if (e.code === 'KeyQ') {
+      this.props.handleEffectChange(false);
+      this.props.handleSoloToggle([]);
     }
   };
 
@@ -127,23 +130,19 @@ class ControlsSmart extends Component {
     selectPart(index, newSelectedParts);
   };
 
-  setTypeOfEffect = (effect) => {
-    this.props.handleEffectChange(effect)
-  }
+  setTypeOfEffect = effect => {
+    this.props.handleEffectChange(effect);
+  };
 
-  setValueEffect = (effectValue) => {
-    // const { mousePositionX, knob } = this.state;
-    // console.log('e', knob.getBoundingClientRect(), mousePositionX,  clientX, clientY)
-    // const knobPositionX = knob.getBoundingClientRect().x; // 0%
-    // const knobWidth = knob.getBoundingClientRect().width
-    // const maxXpostion = knobPositionX + knobWidth; // 100%
-    // console.log(clientX / maxXpostion * 100)
-    this.props.handleValueEffectChange(effectValue)
-  }
-
+  setValueEffect = (effectValue, type) => {
+    // eslint-disable-next-line no-unused-expressions
+    type === 'delay'
+      ? this.props.handleDelayChange(effectValue)
+      : this.props.handleValueEffectChange(effectValue);
+  };
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
     const {
       handleBPMChange,
       togglePlay,
@@ -156,7 +155,8 @@ class ControlsSmart extends Component {
       steps,
       swing,
       handleSwing,
-      effects
+      effects,
+      delay
     } = this.props;
 
     return (
@@ -177,6 +177,7 @@ class ControlsSmart extends Component {
         effects={effects}
         setTypeOfEffect={this.setTypeOfEffect}
         setValueEffect={this.setValueEffect}
+        delay={delay}
       />
     );
   }

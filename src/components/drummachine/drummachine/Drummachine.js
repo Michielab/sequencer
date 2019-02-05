@@ -27,7 +27,8 @@ const mapStateToProps = state => {
     amplitude: state.drummachine.amplitude,
     soloInstruments: state.drummachine.soloInstruments,
     swing: state.drummachine.drummachine.swing,
-    effects: state.drummachine.effects
+    effects: state.drummachine.effects,
+    delay: state.drummachine.delay
   };
 };
 
@@ -145,8 +146,10 @@ class Drummachine extends Component {
       soloInstruments,
       swing,
       bpm,
-      effects
+      effects,
+      delay
     } = this.props;
+    console.log(delay)
     let newDeadLine = deadline;
     const newCurrentStep = currentStep + 1;
     let steps = [
@@ -223,7 +226,8 @@ class Drummachine extends Component {
                   this[buffer],
                   gainValue,
                   instrument,
-                  effects
+                  effects,
+                  delay
                 )
               : ''
             : this.triggerSound(
@@ -232,7 +236,8 @@ class Drummachine extends Component {
                 this[buffer],
                 gainValue,
                 instrument,
-                effects
+                effects,
+                delay
               );
 
           // instrument === 'kick'
@@ -251,32 +256,52 @@ class Drummachine extends Component {
     setCurrentStep(newCurrentStep);
   }
 
-  setupSound = (bufferType, gainValue, effects) => {
+  setupSound = (bufferType, gainValue, effects, delay) => {
+    console.log('delay',delay)
     this.compressor = this.audioContext.createDynamicsCompressor();
     this.source = this.audioContext.createBufferSource();
     this.source.buffer = bufferType;
     this.biquadFilter = this.audioContext.createBiquadFilter();
     this.gain = this.audioContext.createGain();
-    this.source.connect(this.biquadFilter);
-    this.biquadFilter.connect(this.gain)
+    this.delay = this.audioContext.createDelay(10)
+
+    // this.source.connect(this.biquadFilter);
+    this.delay.connect(this.gain)
+    this.delay.delayTime.value = delay.currentLevel / 10;
+    this.biquadFilter.connect(this.delay)
     this.biquadFilter.type = "highpass";
     this.biquadFilter.Q.value = 5;
     let filterValue = effects.currentLevel * 100
+    //delay
+    // this.delay.connect(this.audioContext.destination)
+    let delayValue = delay.currentLevel
+    
+    if(!delay.active) {
+      delayValue = 0
+    }
 
     if(!effects.active) {
       filterValue = 0
     }
-    console.log(effects.currentLevel, filterValue)
+
+    this.delay.delayTime.value = 0.5;
+    // this.delay.delayTime.setValueAtTime(delayValue, this.audioContext.currentTime);
+
     this.biquadFilter.frequency.setValueAtTime(filterValue, this.audioContext.currentTime);
-    // this.biquadFilter.gain.setValueAtTime(25, this.audioContext.currentTime);
+
+        this.source.connect(this.delay);
+        this.source.connect(this.audioContext.destination);
+          
+
     this.gain.connect(this.analyser);
     this.gain.gain.value = gainValue;
     this.gain.connect(this.compressor);
+    this.gain.connect(this.biquadFilter)
     this.compressor.connect(this.audioContext.destination);
   };
 
-  triggerSound = (context, deadline, bufferType, gainValue, instrument, effects) => {
-    this.setupSound(bufferType, gainValue, effects);
+  triggerSound = (context, deadline, bufferType, gainValue, instrument, effects, delay) => {
+    this.setupSound(bufferType, gainValue, effects, delay);
     if (instrument === 'ride') {
       this.gain.gain.exponentialRampToValueAtTime(0.01, deadline + 0.5);
     }

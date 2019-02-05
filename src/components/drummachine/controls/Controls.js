@@ -271,8 +271,8 @@ const styles = theme => ({
       display: 'unset',
       gridColumn: '5 / 6',
       gridRow: '3',
-      textAlign: 'right',
-      marginTop: '4px',
+      textAlign: 'center',
+      marginTop: '-5px',
       marginBottom: '5px',
       color: 'white',
       marginRight: '5px',
@@ -293,6 +293,37 @@ const styles = theme => ({
       marginLeft: '5px'
     }  
   },
+
+  delay: {
+    display: 'none',
+
+    [theme.breakpoints.up('lg')]: {
+      display: 'unset',
+      gridColumn: '5 / 6',
+      gridRow: '3',
+      textAlign: 'center',
+      marginTop: '-10px',
+      marginBottom: '5px',
+      color: 'white',
+      marginRight: '5px',
+      alignSelf: 'center'
+    }  
+  },
+  sliderDelay: {
+    display: 'none',
+    [theme.breakpoints.only('md')]: {
+      // width: '100%',
+      // minWidth: '40px',
+      // marginBottom: '15px'
+    },
+    [theme.breakpoints.up('lg')]: {
+      display: 'unset',
+      gridColumn: '6 / 7',
+      gridRow: '3',
+      marginLeft: '5px',
+      alignSelf: 'center'
+    }  
+  },
   warpSlider: {
     [theme.breakpoints.only('md')]: {
       // width: '100%',
@@ -300,7 +331,7 @@ const styles = theme => ({
       // marginBottom: '15px'
     },
     [theme.breakpoints.up('lg')]: {
-      top: '-9px'
+      top: '-18px'
     }  
   }
 });
@@ -323,11 +354,9 @@ class Controls extends Component {
       swing,
       handleSwing,
       setValueEffect,
-      setTypeOfEffect,
-      toggleMousePress,
+      delay,
       effects,
-      handleMouseLeave,
-      setKnobRef
+
     } = this.props;
 
     let currentStepPart;
@@ -437,12 +466,28 @@ class Controls extends Component {
               min={0}
               max={10}
               value={effects.currentValue}
-              onChange={value => setValueEffect(value)}
+              onChange={value => setValueEffect(value, 'filter')}
               componentPropType="span"
             />
 
           </div>
+          <label className={classes.delay}>Delay</label>
+          <div className={ classes.sliderDelay}>
+          <Slider
+              style={{ width: '100%', height: '20px' }}
+              classes={{
+                trackContainer: classes.slider,
+                warp: classes.warpSlider,
+                pointer: classes.sliderPointer
+              }}
+              min={0}
+              max={10}
+              value={delay.currentValue}
+              onChange={value => setValueEffect(value, 'delay')}
+              componentPropType="span"
+            />
 
+          </div>
         <Button
           onClick={() => togglePlay()}
           classes={{ root: classes.playButton }}
