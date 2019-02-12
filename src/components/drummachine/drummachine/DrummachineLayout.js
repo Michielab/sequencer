@@ -74,12 +74,15 @@ class DrumMachineLayout extends Component {
         <div className={classes.wrapper}>
           <ControlsSmart />
           <InstrumentRowSmart instrumentName="ride" row={4} baseRow={true}/>
-          {/* <InstrumentRowSmart instrumentName="crash" row={4} /> */}
-          <InstrumentRowSmart instrumentName="highHat" row={5} />
-          <InstrumentRowSmart instrumentName="mt" row={6} />
-          <InstrumentRowSmart instrumentName="snare" row={7} />
-          <InstrumentRowSmart instrumentName="clap" row={8} />
-          <InstrumentRowSmart instrumentName="kick" row={9} />
+          <InstrumentRowSmart instrumentName="crash" row={5} />
+          <InstrumentRowSmart instrumentName="highHat" row={6} />
+          <InstrumentRowSmart instrumentName="oh" row={7} />
+          <InstrumentRowSmart instrumentName="ht" row={8} />
+          <InstrumentRowSmart instrumentName="mt" row={9} />
+          <InstrumentRowSmart instrumentName="lt" row={10} />
+          <InstrumentRowSmart instrumentName="snare" row={11} />
+          <InstrumentRowSmart instrumentName="clap" row={12} />
+          <InstrumentRowSmart instrumentName="kick" row={13} />
           <StepsIndicatorSmart />
         </div>
       </div>

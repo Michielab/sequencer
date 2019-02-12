@@ -14,7 +14,8 @@ import {
   handleEffectChange,
   handleValueEffectChange,
   handleSoloToggle,
-  handleDelayChange
+  handleDelayChange,
+  handleFeedbackChange
 } from '~/ducks/actions/actions';
 
 /* Imports components */
@@ -32,7 +33,8 @@ const mapStateToProps = state => {
     currentStep: state.drummachine.drummachine.currentStep,
     swing: state.drummachine.drummachine.swing,
     effects: state.drummachine.effects,
-    delay: state.drummachine.delay
+    delay: state.drummachine.delay,
+    feedback: state.drummachine.feedback
   };
 };
 
@@ -48,7 +50,8 @@ const mapDispatchToProps = dispatch => {
       handleEffectChange,
       handleValueEffectChange,
       handleSoloToggle,
-      handleDelayChange
+      handleDelayChange,
+      handleFeedbackChange
     },
     dispatch
   );
@@ -135,9 +138,12 @@ class ControlsSmart extends Component {
   };
 
   setValueEffect = (effectValue, type) => {
+    console.log(effectValue);
     // eslint-disable-next-line no-unused-expressions
     type === 'delay'
       ? this.props.handleDelayChange(effectValue)
+      : type === 'feedback'
+      ? this.props.handleFeedbackChange(effectValue)
       : this.props.handleValueEffectChange(effectValue);
   };
 
@@ -156,7 +162,8 @@ class ControlsSmart extends Component {
       swing,
       handleSwing,
       effects,
-      delay
+      delay,
+      feedback
     } = this.props;
 
     return (
@@ -178,6 +185,7 @@ class ControlsSmart extends Component {
         setTypeOfEffect={this.setTypeOfEffect}
         setValueEffect={this.setValueEffect}
         delay={delay}
+        feedback={feedback}
       />
     );
   }

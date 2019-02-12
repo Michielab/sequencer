@@ -17,7 +17,7 @@ class StepsIndicator extends Component {
          
                   
                `,
-          gridRow: '12 / span 1 '
+          gridRow: '15 / span 1 '
         }}
       >
         {index + 1}

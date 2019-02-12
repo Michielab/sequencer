@@ -13,6 +13,7 @@ export const HANDLE_COPY_PART = 'HANDLE_COPY_PART';
 export const HANDLE_EFFECT_CHANGE = 'HANDLE_EFFECT_CHANGE';
 export const HANDLE_VALUE_EFFECT_CHANGE = 'HANDLE_VALUE_EFFECT_CHANGE';
 export const HANDLE_DELAY_CHANGE = 'HANDLE_DELAY_CHANGE';
+export const HANDLE_FEEDBACK_CHANGE = 'HANDLE_FEEDBACK_CHANGE';
 
 export const setCurrentStep = currentStep => ({
   type: 'SET_CURRENT_STEP',
@@ -107,6 +108,13 @@ export const handleValueEffectChange = (effectValue) => ({
 
 export const handleDelayChange = (effectValue) => ({
   type: 'HANDLE_DELAY_CHANGE',
+  payload: {
+  effectValue
+  }
+});
+
+export const handleFeedbackChange = (effectValue) => ({
+  type: 'HANDLE_FEEDBACK_CHANGE',
   payload: {
   effectValue
   }

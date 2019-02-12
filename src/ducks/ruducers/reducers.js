@@ -13,7 +13,8 @@ import {
   HANDLE_COPY_PART,
   HANDLE_EFFECT_CHANGE,
   HANDLE_VALUE_EFFECT_CHANGE,
-  HANDLE_DELAY_CHANGE
+  HANDLE_DELAY_CHANGE,
+  HANDLE_FEEDBACK_CHANGE
 } from '~/ducks/actions/actions';
 import { combineReducers } from 'redux';
 
@@ -135,9 +136,14 @@ const audioContextDefaultState = {
   },
   delay: {
     active: true,
-    levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    // levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     currentLevel: 0
-  }, 
+  },
+  feedback: {
+    active: true,
+    // levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    currentLevel: 0
+  },
   activePart: 0,
   selectedParts: ['partOne'],
   soloInstruments: []
@@ -255,7 +261,15 @@ const drummachine = (state = audioContextDefaultState, action) => {
           ...state.effects,
           currentLevel: action.payload.effectValue
         }
-      };  
+      };
+   case HANDLE_FEEDBACK_CHANGE:
+      return {
+        ...state,
+        feedback: {
+          ...state.effects,
+          currentLevel: action.payload.effectValue
+        }
+      };
     default:
       return state;
   }

@@ -324,6 +324,36 @@ const styles = theme => ({
       alignSelf: 'center'
     }  
   },
+  feedback: {
+    display: 'none',
+
+    [theme.breakpoints.up('lg')]: {
+      display: 'unset',
+      gridColumn: '5 / 6',
+      gridRow: '3',
+      textAlign: 'end',
+      // marginTop: '-10px',
+      marginBottom: '8px',
+      color: 'white',
+      marginRight: '5px',
+      alignSelf: 'end'
+    }  
+  },
+  sliderFeedback: {
+    display: 'none',
+    [theme.breakpoints.only('md')]: {
+      // width: '100%',
+      // minWidth: '40px',
+      // marginBottom: '15px'
+    },
+    [theme.breakpoints.up('lg')]: {
+      display: 'unset',
+      gridColumn: '6 / 7',
+      gridRow: '3',
+      marginLeft: '5px',
+      alignSelf: 'end'
+    }  
+  },
   warpSlider: {
     [theme.breakpoints.only('md')]: {
       // width: '100%',
@@ -356,7 +386,7 @@ class Controls extends Component {
       setValueEffect,
       delay,
       effects,
-
+      feedback
     } = this.props;
 
     let currentStepPart;
@@ -482,8 +512,25 @@ class Controls extends Component {
               }}
               min={0}
               max={10}
-              value={delay.currentValue}
+              value={delay.currenLevel}
               onChange={value => setValueEffect(value, 'delay')}
+              componentPropType="span"
+            />
+
+          </div>
+          <label className={classes.feedback}>DelayVo</label>
+          <div className={ classes.sliderFeedback}>
+          <Slider
+              style={{ width: '100%', height: '20px' }}
+              classes={{
+                trackContainer: classes.slider,
+                warp: classes.warpSlider,
+                pointer: classes.sliderPointer
+              }}
+              min={0}
+              max={10}
+              value={feedback.currenLevel}
+              onChange={value => setValueEffect(value, 'feedback')}
               componentPropType="span"
             />
 
