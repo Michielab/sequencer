@@ -322,18 +322,18 @@ class Drummachine extends Component {
       this.audioContext.currentTime
     );
 
-    this.source.connect(this.delay);
+    // this.source.connect(this.delay);
     this.source.connect(this.gain);
     this.gain.connect(this.biquadFilter);
     this.gain.connect(this.analyser);
     this.biquadFilter.connect(this.compressor);
     this.compressor.connect(this.audioContext.destination);
 
-    this.delay.connect(this.feedback);
-    this.feedback.connect(this.biquadFilter);
-    this.feedback.connect(this.analyser);
-    this.biquadFilter.connect(this.compressor);
-    this.compressor.connect(this.audioContext.destination);
+    // this.delay.connect(this.feedback);
+    // this.feedback.connect(this.biquadFilter);
+    // this.feedback.connect(this.analyser);
+    // this.biquadFilter.connect(this.compressor);
+    // this.compressor.connect(this.audioContext.destination);
     // this.analyser.connect(this.delay)
     // this.delay.connect(this.biquadFilter)
     // this.biquadFilter.connect(this.gain)

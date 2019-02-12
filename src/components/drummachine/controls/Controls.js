@@ -272,7 +272,7 @@ const styles = theme => ({
       gridColumn: '5 / 6',
       gridRow: '3',
       textAlign: 'center',
-      marginTop: '-5px',
+      marginTop: '5px',
       marginBottom: '5px',
       color: 'white',
       marginRight: '5px',
@@ -361,7 +361,7 @@ const styles = theme => ({
       // marginBottom: '15px'
     },
     [theme.breakpoints.up('lg')]: {
-      top: '-18px'
+      top: '-10px'
     }  
   }
 });
@@ -501,7 +501,7 @@ class Controls extends Component {
             />
 
           </div>
-          <label className={classes.delay}>Delay</label>
+          {/* <label className={classes.delay}>Delay</label>
           <div className={ classes.sliderDelay}>
           <Slider
               style={{ width: '100%', height: '20px' }}
@@ -534,7 +534,7 @@ class Controls extends Component {
               componentPropType="span"
             />
 
-          </div>
+          </div> */}
         <Button
           onClick={() => togglePlay()}
           classes={{ root: classes.playButton }}
