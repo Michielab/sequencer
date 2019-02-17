@@ -14,7 +14,8 @@ import {
   HANDLE_EFFECT_CHANGE,
   HANDLE_VALUE_EFFECT_CHANGE,
   HANDLE_DELAY_CHANGE,
-  HANDLE_FEEDBACK_CHANGE
+  HANDLE_FEEDBACK_CHANGE,
+  HANDLE_INSTRUMENT_CHANGE
 } from '~/ducks/actions/actions';
 import { combineReducers } from 'redux';
 
@@ -270,6 +271,12 @@ const drummachine = (state = audioContextDefaultState, action) => {
           currentLevel: action.payload.effectValue
         }
       };
+    case HANDLE_INSTRUMENT_CHANGE: {
+      return {
+        ...state,
+        beatSteps: action.payload.beatSteps
+      };
+    }   
     default:
       return state;
   }

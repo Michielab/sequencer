@@ -6,6 +6,46 @@ import InstrumentRowSmart from '~/components/drummachine/instrumentRow/Instrumen
 import ControlsSmart from '~/components/drummachine/controls/ControlsSmart';
 import StepsIndicatorSmart from '~/components/drummachine/stepsIndicator/StepsIndicatorSmart';
 
+const allInstruments = {
+  4: ['ride', 'ride2', 'ride3'],
+  5: ['crash', 'crash2'],
+  6: ['highHat', 'highHat2'],
+  7: ['oh', 'oh2'],
+  8: ['ht', 'h2', 'h3'],
+  9: ['mt', 'mt2'],
+  10: ['lt', 'lt2'],
+  11: [
+    'snare',
+    'snare2',
+    'snare3',
+    'snare4',
+    'snare5',
+    'snare6',
+    'snare7',
+    'snare8',
+    'snare9',
+    'snare10',
+    'snare11',
+    'snare12',
+    'snare13',
+    'snare14',
+    'snare15'
+  ],
+  12: ['clap', 'clap2'],
+  13: [
+    'kick',
+    'kick2',
+    'kick3',
+    'kick3',
+    'kick5',
+    'kick6',
+    'kick7',
+    'kick8',
+    'kick9',
+    'kick10'
+  ]
+};
+
 const styles = theme =>
   createStyles({
     container: {
@@ -78,6 +118,16 @@ class DrumMachineLayout extends Component {
       13: 'kick'
     }
   };
+
+  setInstrument = (key, instrument) => {
+    const { instruments } = this.state;
+    this.setState({
+      instruments: {
+        ...instruments,
+        [key]: instrument
+      }
+    });
+  };
   render() {
     const { classes } = this.props;
     const { instruments } = this.state;
@@ -92,6 +142,8 @@ class DrumMachineLayout extends Component {
               instrumentName={instruments[key]}
               row={key}
               baseRow={key === 4}
+              setInstrument={this.setInstrument}
+              allInstruments={allInstruments}
             />
           ))}
           {/* <InstrumentRowSmart instrumentName="ride" row={4} baseRow={true} />

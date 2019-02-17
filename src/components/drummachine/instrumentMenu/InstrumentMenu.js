@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-
+import { Scrollbars } from 'react-custom-scrollbars';
 
 const ITEM_HEIGHT = 48;
 
 class InstrumentMenu extends React.Component {
   state = {
-    anchorEl: null,
+    anchorEl: null
   };
 
   handleClick = event => {
@@ -23,7 +21,7 @@ class InstrumentMenu extends React.Component {
   render() {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
-    const {options, changeInstrument, renderSpan } = this.props;
+    const { options, setInstrument, renderSpan, row } = this.props;
 
     return (
       <div>
@@ -44,15 +42,32 @@ class InstrumentMenu extends React.Component {
           PaperProps={{
             style: {
               maxHeight: ITEM_HEIGHT * 4.5,
-              width: 200,
+              width: 100,
+              backgroundColor: '#333333',
+              overflowY: 'hidden',
+              outline: '#333333 !important',
+              '*:focus': {
+                outline: 'none'
+              },
+              webkitBoxShadow: 'none',
+              boxShadow: 'none'
             },
           }}
         >
-          {/* {options.map(option => (
-            <MenuItem key={option} selected={option === 'Pyxis'} onClick={() => {this.handleClose(); changeInstrument()}}>
-              {option}
-            </MenuItem>
-          ))} */}
+          <Scrollbars autoHeight style={{outline: 'none'}}>
+            {options.map(option => (
+              <MenuItem
+                style={{ color: 'white' }}
+                key={option}
+                onClick={() => {
+                  this.handleClose();
+                  setInstrument(row, option);
+                }}
+              >
+                {option}
+              </MenuItem>
+            ))}
+          </Scrollbars>
         </Menu>
       </div>
     );

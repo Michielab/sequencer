@@ -59,6 +59,8 @@ class Drummachine extends Component {
     this.dataArray = new Uint8Array(this.bufferLength);
 
     this.clock = new WAAClock(this.audioContext);
+
+    // highHat
     sampleLoader('./hihat.wav', this.audioContext, buffer => {
       this.highHatBuffer = buffer;
     });
@@ -70,43 +72,163 @@ class Drummachine extends Component {
     sampleLoader('./hh02.wav', this.audioContext, buffer => {
       this.highHat3Buffer = buffer;
     });
+
+    // clap
     sampleLoader('./clap.wav', this.audioContext, buffer => {
       this.clapBuffer = buffer;
     });
+
+    sampleLoader('./cp02.wav', this.audioContext, buffer => {
+      this.clap2Buffer = buffer;
+    });
+
+    // mt
     sampleLoader('./mt01.wav', this.audioContext, buffer => {
       this.mtBuffer = buffer;
     });
-    sampleLoader('./sd03.wav', this.audioContext, buffer => {
+
+    sampleLoader('./mt02.wav', this.audioContext, buffer => {
+      this.mt2Buffer = buffer;
+    });
+
+    // sd
+    sampleLoader('./sd01.wav', this.audioContext, buffer => {
       this.snareBuffer = buffer;
     });
-    sampleLoader('./cr02.wav', this.audioContext, buffer => {
+
+    sampleLoader('./sd02.wav', this.audioContext, buffer => {
+      this.snare2Buffer = buffer;
+    });
+    sampleLoader('./sd03.wav', this.audioContext, buffer => {
+      this.snare3Buffer = buffer;
+    });
+    sampleLoader('./sd04.wav', this.audioContext, buffer => {
+      this.snare4Buffer = buffer;
+    });
+    sampleLoader('./sd05.wav', this.audioContext, buffer => {
+      this.snare5Buffer = buffer;
+    });
+    sampleLoader('./sd06.wav', this.audioContext, buffer => {
+      this.snare6Buffer = buffer;
+    });
+    sampleLoader('./sd07.wav', this.audioContext, buffer => {
+      this.snare7Buffer = buffer;
+    });
+    sampleLoader('./sd08.wav', this.audioContext, buffer => {
+      this.snare8Buffer = buffer;
+    });
+    sampleLoader('./sd09.wav', this.audioContext, buffer => {
+      this.snare9Buffer = buffer;
+    });
+    sampleLoader('./sd10.wav', this.audioContext, buffer => {
+      this.snare10Buffer = buffer;
+    });
+
+    sampleLoader('./sd11.wav', this.audioContext, buffer => {
+      this.snare11Buffer = buffer;
+    });
+
+    sampleLoader('./sd12.wav', this.audioContext, buffer => {
+      this.snare12Buffer = buffer;
+    });
+
+    sampleLoader('./sd13.wav', this.audioContext, buffer => {
+      this.snare13Buffer = buffer;
+    });
+
+    sampleLoader('./sd14.wav', this.audioContext, buffer => {
+      this.snare14Buffer = buffer;
+    });
+
+    sampleLoader('./sd15.wav', this.audioContext, buffer => {
+      this.snare15Buffer = buffer;
+    });
+
+    // cr
+
+    sampleLoader('./cr01.wav', this.audioContext, buffer => {
       this.crashBuffer = buffer;
     });
 
+    sampleLoader('./cr02.wav', this.audioContext, buffer => {
+      this.crash2Buffer = buffer;
+    });
+
+    // ride
     sampleLoader('./cym.wav', this.audioContext, buffer => {
       this.rideBuffer = buffer;
     });
 
-    sampleLoader('./bd09.wav', this.audioContext, buffer => {
-      console.log('bufferk', buffer)
+    sampleLoader('./rd01.wav', this.audioContext, buffer => {
+      this.ride2Buffer = buffer;
+    });
 
+    sampleLoader('./rd02.wav', this.audioContext, buffer => {
+      this.ride3Buffer = buffer;
+    });
+
+
+    // bd
+    sampleLoader('./bd01.wav', this.audioContext, buffer => {
       this.kickBuffer = buffer;
     });
+    sampleLoader('./bd02.wav', this.audioContext, buffer => {
+      this.kick2Buffer = buffer;
+    });
+    sampleLoader('./bd03.wav', this.audioContext, buffer => {
+      this.kick3Buffer = buffer;
+    });
+    sampleLoader('./bd04.wav', this.audioContext, buffer => {
+      this.kick4Buffer = buffer;
+    });
+    sampleLoader('./bd05.wav', this.audioContext, buffer => {
+      this.kick5Buffer = buffer;
+    });
+    sampleLoader('./bd06.wav', this.audioContext, buffer => {
+      this.kick6Buffer = buffer;
+    });
+    sampleLoader('./bd07.wav', this.audioContext, buffer => {
+      this.kick7Buffer = buffer;
+    });
+    sampleLoader('./bd08.wav', this.audioContext, buffer => {
+      this.kick8Buffer = buffer;
+    });
+    sampleLoader('./bd09.wav', this.audioContext, buffer => {
+      this.kick9Buffer = buffer;
+    });
+    sampleLoader('./bd10.wav', this.audioContext, buffer => {
+      this.kick10Buffer = buffer;
+    });
+
+    // oh 
 
     sampleLoader('./oh01.wav', this.audioContext, buffer => {
       this.ohBuffer = buffer;
     });
+
+    sampleLoader('./oh02.wav', this.audioContext, buffer => {
+      this.oh2Buffer = buffer;
+    });
+
+    // ht
+
     sampleLoader('./ht01.wav', this.audioContext, buffer => {
       this.htBuffer = buffer;
     });
+
+    sampleLoader('./ht02.wav', this.audioContext, buffer => {
+      this.ht2Buffer = buffer;
+    });
+
+    // lt
     sampleLoader('./lt01.wav', this.audioContext, buffer => {
-      console.log('buffer', buffer)
       this.ltBuffer = buffer;
     });
 
-
+    sampleLoader('./lt02.wav', this.audioContext, buffer => {
+      this.lt2Buffer = buffer;
+    });
     this.draw();
-    console.log('mount')
   }
 
   componentWillUnmount() {

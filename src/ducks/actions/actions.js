@@ -14,6 +14,7 @@ export const HANDLE_EFFECT_CHANGE = 'HANDLE_EFFECT_CHANGE';
 export const HANDLE_VALUE_EFFECT_CHANGE = 'HANDLE_VALUE_EFFECT_CHANGE';
 export const HANDLE_DELAY_CHANGE = 'HANDLE_DELAY_CHANGE';
 export const HANDLE_FEEDBACK_CHANGE = 'HANDLE_FEEDBACK_CHANGE';
+export const HANDLE_INSTRUMENT_CHANGE = 'HANDLE_INSTRUMENT_CHANGE';
 
 export const setCurrentStep = currentStep => ({
   type: 'SET_CURRENT_STEP',
@@ -119,3 +120,10 @@ export const handleFeedbackChange = (effectValue) => ({
   effectValue
   }
 });
+
+export const handleInstrumentChange = (beatSteps) => ({
+  type: 'HANDLE_INSTRUMENT_CHANGE',
+  payload: {
+    beatSteps
+  }
+})

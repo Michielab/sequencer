@@ -6,7 +6,8 @@ import {
   toggleStep,
   handleAmplitudeChange,
   toggleMute,
-  handleSoloToggle
+  handleSoloToggle,
+  handleInstrumentChange
 } from '~/ducks/actions/actions';
 
 import InstrumentRow from './InstrumentRow';
@@ -37,7 +38,13 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { toggleStep, handleAmplitudeChange, toggleMute, handleSoloToggle },
+    {
+      toggleStep,
+      handleAmplitudeChange,
+      toggleMute,
+      handleSoloToggle,
+      handleInstrumentChange
+    },
     dispatch
   );
 };
@@ -61,6 +68,28 @@ class InstrumentRowSmart extends React.PureComponent {
       window.removeEventListener('keypress', this.handleKeyPress, true);
     }
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.instrumentName !== this.props.instrumentName) {
+      this.updateInstrumentRow(prevProps.instrumentName);
+    }
+  }
+
+  updateInstrumentRow = prevInstrument => {
+    const { beatSteps, instrumentName, handleInstrumentChange } = this.props;
+    let newInstrumentRow = { ...beatSteps };
+
+    Object.keys(newInstrumentRow).map(part => {
+      Object.keys(newInstrumentRow[part]).map(instrument => {
+        if (prevInstrument === instrument) {
+          delete Object.assign(newInstrumentRow[part], {
+            [instrumentName]: newInstrumentRow[part][prevInstrument]
+          })[prevInstrument];
+        }
+      });
+    });
+    handleInstrumentChange(newInstrumentRow);
+  };
 
   toggleStep = (index, volume) => {
     const { part, beatSteps, parts, activePart, instrumentName } = this.props;
@@ -174,7 +203,9 @@ class InstrumentRowSmart extends React.PureComponent {
       parts,
       mainGain,
       amplitude,
-      soloInstruments
+      soloInstruments,
+      allInstruments,
+      setInstrument
     } = this.props;
     return (
       <InstrumentRow
@@ -190,6 +221,8 @@ class InstrumentRowSmart extends React.PureComponent {
         amplitude={amplitude}
         handleSoloToggle={this.handleSoloToggle}
         soloInstruments={soloInstruments}
+        allInstruments={allInstruments}
+        setInstrument={setInstrument}
       />
     );
   }

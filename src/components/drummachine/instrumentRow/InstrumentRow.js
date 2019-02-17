@@ -185,7 +185,9 @@ class InstrumentRow extends React.PureComponent {
       toggleMute,
       amplitude,
       handleSoloToggle,
-      soloInstruments
+      soloInstruments,
+      setInstrument,
+      allInstruments
     } = this.props;
 
     let gainValue = amplitude.hasOwnProperty(instrumentName + 'Mute')
@@ -239,6 +241,9 @@ class InstrumentRow extends React.PureComponent {
           </div>
           <div className={classes.instrumentNameContainer}>
             <InstrumentMenu
+              row={row}
+              setInstrument={setInstrument}
+              options={allInstruments[row].filter(instrument => instrument !== instrumentName)}
               renderSpan={handleClick => (
                 <span onClick={(e) => handleClick(e)} style={{cursor: 'pointer'}}>{instrumentName}</span>
               )}
