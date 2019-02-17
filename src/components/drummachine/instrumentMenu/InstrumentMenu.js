@@ -35,7 +35,7 @@ class InstrumentMenu extends React.Component {
         >
           <MoreVertIcon />
         </IconButton> */}
-        {renderSpan()}
+        {renderSpan(this.handleClick)}
         <Menu
           id="long-menu"
           anchorEl={anchorEl}
@@ -48,11 +48,11 @@ class InstrumentMenu extends React.Component {
             },
           }}
         >
-          {options.map(option => (
+          {/* {options.map(option => (
             <MenuItem key={option} selected={option === 'Pyxis'} onClick={() => {this.handleClose(); changeInstrument()}}>
               {option}
             </MenuItem>
-          ))}
+          ))} */}
         </Menu>
       </div>
     );

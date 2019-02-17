@@ -4,6 +4,7 @@ import { withStyles, createStyles, Button } from '@material-ui/core';
 import { Slider } from 'material-ui-slider';
 import { VolumeMute, VolumeUp } from '@material-ui/icons/';
 import Tooltip from '@material-ui/core/Tooltip';
+import InstrumentMenu from '../instrumentMenu/InstrumentMenu';
 
 const styles = theme =>
   createStyles({
@@ -107,7 +108,8 @@ const styles = theme =>
       }
     },
     warpSlider: {
-      top: '-15px'
+      top: '-15px',
+      height: 0
     },
     slider: {
       width: '64px',
@@ -236,7 +238,12 @@ class InstrumentRow extends React.PureComponent {
             </Button>
           </div>
           <div className={classes.instrumentNameContainer}>
-            <span>{instrumentName}</span>
+            <InstrumentMenu
+              renderSpan={handleClick => (
+                <span onClick={(e) => handleClick(e)} style={{cursor: 'pointer'}}>{instrumentName}</span>
+              )}
+            />
+
             <Slider
               style={{ width: '100%', height: '20px' }}
               classes={{

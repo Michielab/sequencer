@@ -24,11 +24,11 @@ const styles = theme =>
       boxShadow: '32px 24px 62px -7px rgba(0,0,0,0.56)',
       [theme.breakpoints.only('xs')]: {
         padding: 5,
-        width: '95%',
+        width: '95%'
       },
       [theme.breakpoints.only('sm')]: {
         padding: 10,
-        width: '95%',
+        width: '95%'
       },
       [theme.breakpoints.up('lg')]: {
         width: '100%'
@@ -44,12 +44,11 @@ const styles = theme =>
       rowGap: '5px',
       gridGap: '5px',
       [theme.breakpoints.only('xs')]: {
-        gridGap: '1px',
+        gridGap: '1px'
       },
       [theme.breakpoints.only('sm')]: {
-        gridGap: '3px',
+        gridGap: '3px'
       }
-
     },
     controlsWrapper: {
       width: '100%',
@@ -65,24 +64,50 @@ const styles = theme =>
   });
 
 class DrumMachineLayout extends Component {
+  state = {
+    instruments: {
+      4: 'ride',
+      5: 'crash',
+      6: 'highHat',
+      7: 'oh',
+      8: 'ht',
+      9: 'mt',
+      10: 'lt',
+      11: 'snare',
+      12: 'clap',
+      13: 'kick'
+    }
+  };
   render() {
     const { classes } = this.props;
+    const { instruments } = this.state;
 
     return (
       <div className={classes.container}>
         <div className={classes.controlsWrapper} />
         <div className={classes.wrapper}>
           <ControlsSmart />
-          <InstrumentRowSmart instrumentName="ride" row={4} baseRow={true}/>
+          {Object.keys(instruments).map(key => (
+            <InstrumentRowSmart
+              instrumentName={instruments[key]}
+              row={key}
+              baseRow={key === 4}
+            />
+          ))}
+          {/* <InstrumentRowSmart instrumentName="ride" row={4} baseRow={true} />
           <InstrumentRowSmart instrumentName="crash" row={5} />
-          <InstrumentRowSmart instrumentName="highHat" row={6} />
+          <InstrumentRowSmart
+            instrumentName="highHat"
+            row={6}
+            instrumentArray={['highHat', 'highHat2', 'highHat2']}
+          />
           <InstrumentRowSmart instrumentName="oh" row={7} />
           <InstrumentRowSmart instrumentName="ht" row={8} />
           <InstrumentRowSmart instrumentName="mt" row={9} />
           <InstrumentRowSmart instrumentName="lt" row={10} />
           <InstrumentRowSmart instrumentName="snare" row={11} />
           <InstrumentRowSmart instrumentName="clap" row={12} />
-          <InstrumentRowSmart instrumentName="kick" row={13} />
+          <InstrumentRowSmart instrumentName="kick" row={13} /> */}
           <StepsIndicatorSmart />
         </div>
       </div>

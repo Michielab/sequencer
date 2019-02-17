@@ -62,6 +62,14 @@ class Drummachine extends Component {
     sampleLoader('./hihat.wav', this.audioContext, buffer => {
       this.highHatBuffer = buffer;
     });
+
+    sampleLoader('./hh01.wav', this.audioContext, buffer => {
+      this.highHat2Buffer = buffer;
+    });
+
+    sampleLoader('./hh02.wav', this.audioContext, buffer => {
+      this.highHat3Buffer = buffer;
+    });
     sampleLoader('./clap.wav', this.audioContext, buffer => {
       this.clapBuffer = buffer;
     });
@@ -95,6 +103,8 @@ class Drummachine extends Component {
       console.log('buffer', buffer)
       this.ltBuffer = buffer;
     });
+
+
     this.draw();
     console.log('mount')
   }
