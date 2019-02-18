@@ -75,6 +75,10 @@ class InstrumentRowSmart extends React.PureComponent {
     }
   }
 
+  // shouldComponentUpdate(nextProps) {
+  //   console.log('shouldComponentUpdate', this.props, nextProps)
+  // }
+
   updateInstrumentRow = prevInstrument => {
     const { beatSteps, instrumentName, handleInstrumentChange } = this.props;
     let newInstrumentRow = { ...beatSteps };
@@ -147,7 +151,6 @@ class InstrumentRowSmart extends React.PureComponent {
   handleSoloToggle = instrumentName => {
     const { soloInstruments, handleSoloToggle } = this.props;
     const { shift } = this.state;
-    console.log(shift);
 
     let newSoloInstruments = [];
 
@@ -159,8 +162,8 @@ class InstrumentRowSmart extends React.PureComponent {
           ))
       : soloInstruments.indexOf(instrumentName) === -1 &&
         newSoloInstruments.push(instrumentName);
-    console.log(newSoloInstruments);
-    handleSoloToggle(newSoloInstruments);
+
+        handleSoloToggle(newSoloInstruments);
   };
 
   handleShiftPress = e => {
@@ -207,6 +210,8 @@ class InstrumentRowSmart extends React.PureComponent {
       allInstruments,
       setInstrument
     } = this.props;
+    console.log('insideRendeSmart', instrumentName)
+
     return (
       <InstrumentRow
         instrumentName={instrumentName}

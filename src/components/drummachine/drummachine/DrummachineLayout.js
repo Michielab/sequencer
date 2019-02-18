@@ -36,7 +36,7 @@ const allInstruments = {
     'kick',
     'kick2',
     'kick3',
-    'kick3',
+    'kick4',
     'kick5',
     'kick6',
     'kick7',
@@ -131,7 +131,7 @@ class DrumMachineLayout extends Component {
   render() {
     const { classes } = this.props;
     const { instruments } = this.state;
-
+    console.log('insideRender')
     return (
       <div className={classes.container}>
         <div className={classes.controlsWrapper} />

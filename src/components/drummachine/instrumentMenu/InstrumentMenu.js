@@ -41,7 +41,7 @@ class InstrumentMenu extends React.Component {
           onClose={this.handleClose}
           PaperProps={{
             style: {
-              maxHeight: ITEM_HEIGHT * 4.5,
+              // maxHeight: ITEM_HEIGHT * 4.5,
               width: 100,
               backgroundColor: '#333333',
               overflowY: 'hidden',

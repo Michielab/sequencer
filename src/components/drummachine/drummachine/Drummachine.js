@@ -228,7 +228,7 @@ class Drummachine extends Component {
     sampleLoader('./lt02.wav', this.audioContext, buffer => {
       this.lt2Buffer = buffer;
     });
-    this.draw();
+    // this.draw();
   }
 
   componentWillUnmount() {
@@ -363,9 +363,9 @@ class Drummachine extends Component {
 
           if (swing > 0 && newCurrentStep % 2 === 1) {
             newDeadLine =
-              newDeadLine + (this.covertBMPtoSeconds(bpm) / 100) * swing;
+              newDeadLine + (this.covertBMPtoSeconds(bpm) / 50) * swing;
           }
-          console.log(buffer)
+
           // eslint-disable-next-line no-unused-expressions
           soloInstruments.length > 0
             ? soloInstruments.indexOf(instrument) !== -1
