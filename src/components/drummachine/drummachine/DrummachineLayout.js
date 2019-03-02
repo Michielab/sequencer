@@ -131,7 +131,7 @@ class DrumMachineLayout extends Component {
   render() {
     const { classes } = this.props;
     const { instruments } = this.state;
-    console.log('insideRender')
+
     return (
       <div className={classes.container}>
         <div className={classes.controlsWrapper} />
@@ -139,6 +139,7 @@ class DrumMachineLayout extends Component {
           <ControlsSmart />
           {Object.keys(instruments).map(key => (
             <InstrumentRowSmart
+              key={key}
               instrumentName={instruments[key]}
               row={key}
               baseRow={key === 4}
@@ -146,20 +147,6 @@ class DrumMachineLayout extends Component {
               allInstruments={allInstruments}
             />
           ))}
-          {/* <InstrumentRowSmart instrumentName="ride" row={4} baseRow={true} />
-          <InstrumentRowSmart instrumentName="crash" row={5} />
-          <InstrumentRowSmart
-            instrumentName="highHat"
-            row={6}
-            instrumentArray={['highHat', 'highHat2', 'highHat2']}
-          />
-          <InstrumentRowSmart instrumentName="oh" row={7} />
-          <InstrumentRowSmart instrumentName="ht" row={8} />
-          <InstrumentRowSmart instrumentName="mt" row={9} />
-          <InstrumentRowSmart instrumentName="lt" row={10} />
-          <InstrumentRowSmart instrumentName="snare" row={11} />
-          <InstrumentRowSmart instrumentName="clap" row={12} />
-          <InstrumentRowSmart instrumentName="kick" row={13} /> */}
           <StepsIndicatorSmart />
         </div>
       </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { createSelector } from 'reselect';
 import {
   toggleStep,
   handleAmplitudeChange,
@@ -9,30 +10,70 @@ import {
   handleSoloToggle,
   handleInstrumentChange
 } from '~/ducks/actions/actions';
-
 import InstrumentRow from './InstrumentRow';
 
-const mapStateToProps = (state, ownProps) => {
-  const part = state.drummachine.parts[state.drummachine.activePart];
-  const instrumentName = ownProps.instrumentName;
-  const stepArray = state.drummachine.beatSteps[part].hasOwnProperty(
-    instrumentName
-  )
-    ? [...state.drummachine.beatSteps[part][instrumentName]]
-    : [...state.drummachine.beatSteps.steps];
-
-  const mainGain = state.drummachine.amplitude.hasOwnProperty(instrumentName)
-    ? state.drummachine.amplitude[instrumentName]
+const getSteps = (state, props) => {
+  return (
+    state.drummachine.beatSteps[
+      state.drummachine.parts[state.drummachine.activePart]
+    ].hasOwnProperty(props.instrumentName) &&
+    state.drummachine.beatSteps[
+      state.drummachine.parts[state.drummachine.activePart]
+    ][props.instrumentName]
+  );
+};
+const getPart = state => state.drummachine.parts[state.drummachine.activePart];
+const getParts = state => state.drummachine.parts;
+const getActivePart = state => state.drummachine.activePart;
+const getMainGain = (state, props) =>
+  state.drummachine.amplitude.hasOwnProperty(props.instrumentName)
+    ? state.drummachine.amplitude[props.instrumentName]
     : state.drummachine.amplitude.mainGain;
-  return {
-    steps: stepArray,
-    parts: state.drummachine.parts,
-    part,
-    beatSteps: state.drummachine.beatSteps,
-    activePart: state.drummachine.activePart,
-    mainGain,
-    amplitude: state.drummachine.amplitude,
-    soloInstruments: state.drummachine.soloInstruments
+const getMuteState = (state, props) =>
+  state.drummachine.amplitude.hasOwnProperty(props.instrumentName + 'Mute')
+    ? state.drummachine.amplitude[props.instrumentName + 'Mute']
+      ? true
+      : false
+    : false;
+const getSoloInstruments = state => state.drummachine.soloInstruments;
+
+const makeInstrumentRowData = () =>
+  createSelector(
+    [
+      getSteps,
+      getParts,
+      getPart,
+      getActivePart,
+      getMainGain,
+      getSoloInstruments,
+      getMuteState
+    ],
+    (
+      steps,
+      parts,
+      part,
+      activePart,
+      mainGain,
+      soloInstruments,
+      getMuteState
+    ) => {
+      return {
+        steps,
+        parts,
+        part,
+        activePart,
+        mainGain,
+        soloInstruments,
+        mute: getMuteState
+      };
+    }
+  );
+
+const mapStateToProps = () => {
+  const getInstrumentRowData = makeInstrumentRowData();
+  return (state, ownProps) => {
+    const instrumentData = getInstrumentRowData(state, ownProps);
+    return { ...instrumentData };
   };
 };
 
@@ -56,6 +97,7 @@ class InstrumentRowSmart extends React.PureComponent {
   componentDidMount() {
     window.addEventListener('keydown', this.handleShiftPress, true);
     window.addEventListener('keyup', this.handleShiftUp, true);
+
     if (this.props.baseRow) {
       window.addEventListener('keypress', this.handleKeyPress, true);
     }
@@ -75,67 +117,36 @@ class InstrumentRowSmart extends React.PureComponent {
     }
   }
 
-  // shouldComponentUpdate(nextProps) {
-  //   console.log('shouldComponentUpdate', this.props, nextProps)
-  // }
-
   updateInstrumentRow = prevInstrument => {
-    const { beatSteps, instrumentName, handleInstrumentChange } = this.props;
-    let newInstrumentRow = { ...beatSteps };
-
-    Object.keys(newInstrumentRow).map(part => {
-      Object.keys(newInstrumentRow[part]).map(instrument => {
-        if (prevInstrument === instrument) {
-          delete Object.assign(newInstrumentRow[part], {
-            [instrumentName]: newInstrumentRow[part][prevInstrument]
-          })[prevInstrument];
-        }
-      });
-    });
-    handleInstrumentChange(newInstrumentRow);
+    const { instrumentName, handleInstrumentChange } = this.props;
+    handleInstrumentChange(prevInstrument, instrumentName);
   };
 
   toggleStep = (index, volume) => {
-    const { part, beatSteps, parts, activePart, instrumentName } = this.props;
+    const { instrumentName } = this.props;
+    let { steps } = this.props;
 
-    let newSteps = beatSteps;
-
-    if (
-      (!newSteps[parts[0]].hasOwnProperty(instrumentName) &&
-        activePart === 1) ||
-      (!newSteps[parts[0]].hasOwnProperty(instrumentName) &&
-        activePart === 2) ||
-      (!newSteps[parts[0]].hasOwnProperty(instrumentName) && activePart === 3)
-    ) {
-      newSteps[parts[0]][instrumentName] = beatSteps[parts[0]].steps;
+    if (!steps) {
+      steps = [
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 }
+      ];
     }
-
-    if (
-      (!beatSteps[parts[1]].hasOwnProperty(instrumentName) &&
-        activePart === 3) ||
-      (!beatSteps[parts[1]].hasOwnProperty(instrumentName) && activePart === 2)
-    ) {
-      newSteps[parts[1]][instrumentName] = beatSteps[parts[1]].steps;
-    }
-
-    if (
-      !beatSteps[parts[2]].hasOwnProperty(instrumentName) &&
-      activePart === 3
-    ) {
-      newSteps[parts[2]][instrumentName] = beatSteps[parts[2]].steps;
-    }
-
-    let steps = this.props.steps;
-    const stepValue =
-      steps[index].step === 1 ? (steps[index].amplitude !== volume ? 1 : 0) : 1;
-
-    newSteps[part][instrumentName] = steps;
-    newSteps[part][instrumentName][index] = {
-      step: stepValue,
-      amplitude: volume
-    };
-
-    this.props.toggleStep(newSteps);
+    this.props.toggleStep(instrumentName, index, volume, steps);
   };
 
   changeAmplitude = (instrumentName, amplitudeValue) => {
@@ -163,7 +174,7 @@ class InstrumentRowSmart extends React.PureComponent {
       : soloInstruments.indexOf(instrumentName) === -1 &&
         newSoloInstruments.push(instrumentName);
 
-        handleSoloToggle(newSoloInstruments);
+    handleSoloToggle(newSoloInstruments);
   };
 
   handleShiftPress = e => {
@@ -176,7 +187,6 @@ class InstrumentRowSmart extends React.PureComponent {
   };
 
   handleKeyPress = e => {
-    console.log(e);
     const instrumentsNames = {
       Digit1: 'ride',
       Digit2: 'highHat',
@@ -202,16 +212,35 @@ class InstrumentRowSmart extends React.PureComponent {
       row,
       instrumentName,
       part,
-      steps,
       parts,
       mainGain,
-      amplitude,
-      soloInstruments,
+      soloInstruments = [],
       allInstruments,
-      setInstrument
+      setInstrument,
+      mute
     } = this.props;
-    console.log('insideRendeSmart', instrumentName)
 
+    let { steps } = this.props;
+    if (!steps) {
+      steps = [
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 }
+      ];
+    }
     return (
       <InstrumentRow
         instrumentName={instrumentName}
@@ -223,11 +252,11 @@ class InstrumentRowSmart extends React.PureComponent {
         mainGain={mainGain}
         changeAmplitude={this.changeAmplitude}
         toggleMute={this.handleToggleMute}
-        amplitude={amplitude}
         handleSoloToggle={this.handleSoloToggle}
         soloInstruments={soloInstruments}
         allInstruments={allInstruments}
         setInstrument={setInstrument}
+        mute={mute}
       />
     );
   }
@@ -235,12 +264,10 @@ class InstrumentRowSmart extends React.PureComponent {
 
 InstrumentRowSmart.propTypes = {
   instrumentName: PropTypes.string,
-  steps: PropTypes.array,
   parts: PropTypes.array,
   part: PropTypes.string,
-  beatSteps: PropTypes.object,
   activePart: PropTypes.number,
-  row: PropTypes.number,
+  row: PropTypes.string,
   mainGain: PropTypes.number,
   amplitude: PropTypes.object,
   toggleStep: PropTypes.func,

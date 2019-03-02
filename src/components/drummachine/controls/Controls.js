@@ -244,11 +244,6 @@ const styles = theme => ({
     backgroundColor: '#6b6b6b',
     borderRadius: '50%',
     boxShadow: 'inset -2px 2px 0px 0px rgba(#fff, 0.1)'
-    // inset 2px -2px 0px 0px rgba(#111, 0.2)
-    // -5px 5px 5px 0px #111,
-    // -10px 10px 10px -5px #111,
-    // -20px 20px 20px -10px #111,
-    // -25px 25px 25px -10px #111'
   },
   knobAfter: {
     position: 'absolute',
@@ -384,8 +379,10 @@ class Controls extends Component {
       swing,
       handleSwing,
       setValueEffect,
+      // eslint-disable-next-line no-unused-vars
       delay,
       effects,
+      // eslint-disable-next-line no-unused-vars
       feedback
     } = this.props;
 

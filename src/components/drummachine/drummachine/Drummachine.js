@@ -297,7 +297,7 @@ class Drummachine extends Component {
       delay,
       feedback
     } = this.props;
-    console.log(this.props);
+
     let newDeadLine = deadline;
     const newCurrentStep = currentStep + 1;
     let steps = [
@@ -344,6 +344,7 @@ class Drummachine extends Component {
         ? [...steps, ...steps]
         : steps;
 
+    // eslint-disable-next-line array-callback-return
     Object.keys(beats).map((instrument, index) => {
       if (beats[instrument][newCurrentStep % steps.length]) {
         if (beats[instrument][newCurrentStep % steps.length].step) {
@@ -431,7 +432,6 @@ class Drummachine extends Component {
       delayValue = 0;
     }
     // this.delay.delayTime.value = delay.currentLevel / 10;
-    console.log(feedback);
     this.delay.delayTime.setValueAtTime(
       delayValue,
       this.audioContext.currentTime

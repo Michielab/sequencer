@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, createStyles, Button } from '@material-ui/core';
 import { Slider } from 'material-ui-slider';
 import { VolumeMute, VolumeUp } from '@material-ui/icons/';
-import Tooltip from '@material-ui/core/Tooltip';
 import InstrumentMenu from '../instrumentMenu/InstrumentMenu';
 
 const styles = theme =>
@@ -183,18 +182,16 @@ class InstrumentRow extends React.PureComponent {
       mainGain,
       changeAmplitude,
       toggleMute,
-      amplitude,
       handleSoloToggle,
       soloInstruments,
       setInstrument,
-      allInstruments
+      allInstruments,
+      mute
     } = this.props;
 
-    let gainValue = amplitude.hasOwnProperty(instrumentName + 'Mute')
-      ? amplitude[instrumentName + 'Mute']
+    let gainValue = mute
         ? 0
         : mainGain
-      : mainGain;
 
     return (
       <React.Fragment>
@@ -302,7 +299,7 @@ InstrumentRow.propTypes = {
   steps: PropTypes.array,
   parts: PropTypes.array,
   part: PropTypes.string,
-  row: PropTypes.number,
+  row: PropTypes.string,
   mainGain: PropTypes.number,
   amplitude: PropTypes.object,
   toggleStep: PropTypes.func,

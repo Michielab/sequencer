@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Scrollbars } from 'react-custom-scrollbars';
-
-const ITEM_HEIGHT = 48;
 
 class InstrumentMenu extends React.Component {
   state = {
@@ -25,14 +23,6 @@ class InstrumentMenu extends React.Component {
 
     return (
       <div>
-        {/* <IconButton
-          aria-label="More"
-          aria-owns={open ? 'long-menu' : undefined}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
-          <MoreVertIcon />
-        </IconButton> */}
         {renderSpan(this.handleClick)}
         <Menu
           id="long-menu"
@@ -41,7 +31,6 @@ class InstrumentMenu extends React.Component {
           onClose={this.handleClose}
           PaperProps={{
             style: {
-              // maxHeight: ITEM_HEIGHT * 4.5,
               width: 100,
               backgroundColor: '#333333',
               overflowY: 'hidden',

@@ -138,7 +138,6 @@ class ControlsSmart extends Component {
   };
 
   setValueEffect = (effectValue, type) => {
-    console.log(effectValue);
     // eslint-disable-next-line no-unused-expressions
     type === 'delay'
       ? this.props.handleDelayChange(effectValue)
@@ -148,7 +147,6 @@ class ControlsSmart extends Component {
   };
 
   render() {
-    console.log(this.props);
     const {
       handleBPMChange,
       togglePlay,

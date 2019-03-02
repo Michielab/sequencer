@@ -21,7 +21,7 @@ the number of data values you will have to play with for the visualization*/
 
     this.playSound();
     this.draw();
-    console.log(this.canvas.offsetWidth)
+
     // requestAnimationFrame(() => this.draw());
   }
 
@@ -76,7 +76,7 @@ the number of data values you will have to play with for the visualization*/
       } else {
         this.myCanvas.lineTo(x, y);
         // this.points.push({x,y})
-        // console.log('points', x,y)
+
 
       }
 

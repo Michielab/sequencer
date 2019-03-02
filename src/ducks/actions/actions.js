@@ -23,10 +23,13 @@ export const setCurrentStep = currentStep => ({
   }
 });
 
-export const toggleStep = newSteps => ({
+export const toggleStep = (instrumentName, index, volume, steps) => ({
   type: 'TOGGLE_STEP',
   payload: {
-    newSteps
+    instrumentName,
+    index,
+    volume,
+    steps
   }
 });
 
@@ -64,21 +67,21 @@ export const handleAmplitudeChange = (instrument, amplitude) => ({
   }
 });
 
-export const toggleMute = (instrument) => ({
+export const toggleMute = instrument => ({
   type: 'MUTE_INSTRUMENT',
   payload: {
     instrument
   }
 });
 
-export const handleSoloToggle = (selectedSoloInstuments) => ({
+export const handleSoloToggle = selectedSoloInstuments => ({
   type: 'HANDLE_SOLO_TOGGLE',
   payload: {
     selectedSoloInstuments
   }
 });
 
-export const handleSwing = (swing) => ({
+export const handleSwing = swing => ({
   type: 'HANDLE_SWING_CHANGE',
   payload: {
     swing
@@ -93,37 +96,38 @@ export const handleCopyPart = (part, currentPart) => ({
   }
 });
 
-export const handleEffectChange = (effect) => ({
+export const handleEffectChange = effect => ({
   type: 'HANDLE_EFFECT_CHANGE',
   payload: {
     effect
   }
 });
 
-export const handleValueEffectChange = (effectValue) => ({
+export const handleValueEffectChange = effectValue => ({
   type: 'HANDLE_VALUE_EFFECT_CHANGE',
   payload: {
-  effectValue
+    effectValue
   }
 });
 
-export const handleDelayChange = (effectValue) => ({
+export const handleDelayChange = effectValue => ({
   type: 'HANDLE_DELAY_CHANGE',
   payload: {
-  effectValue
+    effectValue
   }
 });
 
-export const handleFeedbackChange = (effectValue) => ({
+export const handleFeedbackChange = effectValue => ({
   type: 'HANDLE_FEEDBACK_CHANGE',
   payload: {
-  effectValue
+    effectValue
   }
 });
 
-export const handleInstrumentChange = (beatSteps) => ({
+export const handleInstrumentChange = (prevInstrument, instrumentName) => ({
   type: 'HANDLE_INSTRUMENT_CHANGE',
   payload: {
-    beatSteps
+    prevInstrument,
+    instrumentName
   }
-})
+});

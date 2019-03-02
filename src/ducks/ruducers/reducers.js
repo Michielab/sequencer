@@ -19,6 +19,64 @@ import {
 } from '~/ducks/actions/actions';
 import { combineReducers } from 'redux';
 
+const updateInstrumentRow = (beatSteps, prevInstrument, instrumentName) => {
+  let newInstrumentRow = { ...beatSteps };
+
+  // eslint-disable-next-line array-callback-return
+  Object.keys(newInstrumentRow).map(part => {
+    // eslint-disable-next-line array-callback-return
+    Object.keys(newInstrumentRow[part]).map(instrument => {
+      if (prevInstrument === instrument) {
+        delete Object.assign(newInstrumentRow[part], {
+          [instrumentName]: newInstrumentRow[part][prevInstrument]
+        })[prevInstrument];
+      }
+    });
+  });
+  return newInstrumentRow;
+};
+
+const toggleStep = (
+  instrumentName,
+  index,
+  volume,
+  steps,
+  beatSteps,
+  activePart,
+  parts,
+  part
+) => {
+
+  if (
+    (!beatSteps[parts[0]].hasOwnProperty(instrumentName) && activePart === 1) ||
+    (!beatSteps[parts[0]].hasOwnProperty(instrumentName) && activePart === 2) ||
+    (!beatSteps[parts[0]].hasOwnProperty(instrumentName) && activePart === 3)
+  ) {
+    beatSteps[parts[0]][instrumentName] = beatSteps[parts[0]].steps;
+  }
+
+  if (
+    (!beatSteps[parts[1]].hasOwnProperty(instrumentName) && activePart === 3) ||
+    (!beatSteps[parts[1]].hasOwnProperty(instrumentName) && activePart === 2)
+  ) {
+    beatSteps[parts[1]][instrumentName] = beatSteps[parts[1]].steps;
+  }
+
+  if (!beatSteps[parts[2]].hasOwnProperty(instrumentName) && activePart === 3) {
+    beatSteps[parts[2]][instrumentName] = beatSteps[parts[2]].steps;
+  }
+
+  const stepValue =
+    steps[index].step === 1 ? (steps[index].amplitude !== volume ? 1 : 0) : 1;
+
+  beatSteps[part][instrumentName] = steps;
+  beatSteps[part][instrumentName][index] = {
+    step: stepValue,
+    amplitude: volume
+  };
+  return beatSteps
+};
+
 const audioContextDefaultState = {
   drummachine: {
     playing: false,
@@ -137,12 +195,10 @@ const audioContextDefaultState = {
   },
   delay: {
     active: true,
-    // levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     currentLevel: 0
   },
   feedback: {
     active: true,
-    // levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     currentLevel: 0
   },
   activePart: 0,
@@ -158,9 +214,20 @@ const drummachine = (state = audioContextDefaultState, action) => {
         audioContext: action.payload.audioContext
       };
     case TOGGLE_STEP:
+      const part =  'partOne'
+      const newSteps = toggleStep(
+        action.payload.instrumentName,
+        action.payload.index,
+        action.payload.volume,
+        action.payload.steps,
+        state.beatSteps,
+        state.activePart,
+        state.parts,
+        part
+      );
       return {
         ...state,
-        beatSteps: action.payload.newSteps
+        beatSteps: newSteps
       };
     case TOGGLE_PLAY:
       return {
@@ -263,7 +330,7 @@ const drummachine = (state = audioContextDefaultState, action) => {
           currentLevel: action.payload.effectValue
         }
       };
-   case HANDLE_FEEDBACK_CHANGE:
+    case HANDLE_FEEDBACK_CHANGE:
       return {
         ...state,
         feedback: {
@@ -272,11 +339,16 @@ const drummachine = (state = audioContextDefaultState, action) => {
         }
       };
     case HANDLE_INSTRUMENT_CHANGE: {
+      const newBeatsteps = updateInstrumentRow(
+        state.beatSteps,
+        action.payload.prevInstrument,
+        action.payload.instrumentName
+      );
       return {
         ...state,
-        beatSteps: action.payload.beatSteps
+        beatSteps: newBeatsteps
       };
-    }   
+    }
     default:
       return state;
   }
