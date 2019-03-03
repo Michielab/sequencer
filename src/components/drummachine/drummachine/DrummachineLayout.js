@@ -9,7 +9,7 @@ import StepsIndicatorSmart from '~/components/drummachine/stepsIndicator/StepsIn
 const allInstruments = {
   4: ['ride', 'ride2', 'ride3'],
   5: ['crash', 'crash2'],
-  6: ['highHat', 'highHat2'],
+  6: ['hh', 'hh2'],
   7: ['oh', 'oh2'],
   8: ['ht', 'h2', 'h3'],
   9: ['mt', 'mt2'],
@@ -111,7 +111,7 @@ class DrumMachineLayout extends Component {
     instruments: {
       4: 'ride',
       5: 'crash',
-      6: 'highHat',
+      6: 'hh',
       7: 'oh',
       8: 'ht',
       9: 'mt',

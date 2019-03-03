@@ -191,9 +191,7 @@ class InstrumentRow extends React.PureComponent {
       mute
     } = this.props;
 
-    let gainValue = mute
-        ? 0
-        : mainGain
+    let gainValue = mute ? 0 : mainGain;
 
     return (
       <React.Fragment>
@@ -242,12 +240,18 @@ class InstrumentRow extends React.PureComponent {
             <InstrumentMenu
               row={row}
               setInstrument={setInstrument}
-              options={allInstruments[row].filter(instrument => instrument !== instrumentName)}
+              options={allInstruments[row].filter(
+                instrument => instrument !== instrumentName
+              )}
               renderSpan={handleClick => (
-                <span onClick={(e) => handleClick(e)} style={{cursor: 'pointer'}}>{instrumentName}</span>
+                <span
+                  onClick={e => handleClick(e)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {instrumentName}
+                </span>
               )}
             />
-
             <Slider
               style={{ width: '100%', height: '20px' }}
               classes={{

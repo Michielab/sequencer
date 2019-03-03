@@ -167,7 +167,7 @@ class InstrumentRowSmart extends React.PureComponent {
   handleKeyPress = e => {
     const instrumentsNames = {
       Digit1: 'ride',
-      Digit2: 'highHat',
+      Digit2: 'hh',
       Digit3: 'mt',
       Digit4: 'snare',
       Digit5: 'clap',
@@ -198,7 +198,19 @@ class InstrumentRowSmart extends React.PureComponent {
       mute,
       steps
     } = this.props;
+    // let { steps } = this.props;
 
+    // if(row === '6') {
+    //   steps = [
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //   ]
+    // }
     return (
       <InstrumentRow
         instrumentName={instrumentName}

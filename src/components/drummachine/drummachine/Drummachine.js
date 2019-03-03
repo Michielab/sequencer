@@ -62,15 +62,15 @@ class Drummachine extends Component {
 
     // highHat
     sampleLoader('./hihat.wav', this.audioContext, buffer => {
-      this.highHatBuffer = buffer;
+      this.hhBuffer = buffer;
     });
 
     sampleLoader('./hh01.wav', this.audioContext, buffer => {
-      this.highHat2Buffer = buffer;
+      this.hh2Buffer = buffer;
     });
 
     sampleLoader('./hh02.wav', this.audioContext, buffer => {
-      this.highHat3Buffer = buffer;
+      this.hh3Buffer = buffer;
     });
 
     // clap
@@ -324,7 +324,7 @@ class Drummachine extends Component {
     let keyArray = Object.keys(beatSteps).filter(
       element => element !== 'steps'
     );
-
+      // console.log(beatSteps)
     keyArray.map(part =>
       Object.keys(beatSteps[part]).map((instrument, index) => {
         return beats.hasOwnProperty(instrument)

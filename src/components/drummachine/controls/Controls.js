@@ -55,7 +55,7 @@ const styles = theme => ({
       width: '40px',
       borderWidth: '1px',
       justifySelf: 'left',
-      marginBottom: '0px',
+      marginBottom: '0px'
     },
     [theme.breakpoints.only('md')]: {
       marginRight: 0,
@@ -83,7 +83,7 @@ const styles = theme => ({
       fontSize: '13px',
       justifySelf: 'right',
       gridColumn: '3 / 5',
-      marginBottom: '2px',
+      marginBottom: '2px'
     },
     [theme.breakpoints.only('md')]: {
       textAlign: 'right',
@@ -117,7 +117,7 @@ const styles = theme => ({
       width: '40px',
       borderWidth: '1px',
       justifySelf: 'left',
-      marginBottom: '2px',
+      marginBottom: '2px'
     },
     [theme.breakpoints.only('md')]: {
       marginRight: 0,
@@ -142,7 +142,7 @@ const styles = theme => ({
       minWidth: '20px',
       gridColumn: '14 / 16',
       minHeight: 'unset',
-      height: '25px',
+      height: '20px',
       borderWidth: '1px',
       justifySelf: 'center',
       marginBottom: '5px'
@@ -219,7 +219,7 @@ const styles = theme => ({
       minWidth: '20px',
       gridColumn: '16 / 18',
       minHeight: 'unset',
-      height: '25px',
+      height: '20px',
       borderWidth: '1px',
       justifySelf: 'left'
     },
@@ -239,6 +239,11 @@ const styles = theme => ({
     },
     [theme.breakpoints.up('lg')]: {
       marginBottom: '30px'
+    }
+  },
+  icons: {
+    [theme.breakpoints.only('xs')]: {
+      fontSize: '18px'
     }
   },
   knob: {
@@ -275,9 +280,8 @@ const styles = theme => ({
       marginTop: '5px',
       marginBottom: '5px',
       color: 'white',
-      marginRight: '5px',
-
-    }  
+      marginRight: '5px'
+    }
   },
   slider: {
     display: 'none',
@@ -291,7 +295,7 @@ const styles = theme => ({
       gridColumn: '6 / 7',
       gridRow: '3',
       marginLeft: '5px'
-    }  
+    }
   },
 
   delay: {
@@ -307,7 +311,7 @@ const styles = theme => ({
       color: 'white',
       marginRight: '5px',
       alignSelf: 'center'
-    }  
+    }
   },
   sliderDelay: {
     display: 'none',
@@ -322,7 +326,7 @@ const styles = theme => ({
       gridRow: '3',
       marginLeft: '5px',
       alignSelf: 'center'
-    }  
+    }
   },
   feedback: {
     display: 'none',
@@ -337,7 +341,7 @@ const styles = theme => ({
       color: 'white',
       marginRight: '5px',
       alignSelf: 'end'
-    }  
+    }
   },
   sliderFeedback: {
     display: 'none',
@@ -352,7 +356,7 @@ const styles = theme => ({
       gridRow: '3',
       marginLeft: '5px',
       alignSelf: 'end'
-    }  
+    }
   },
   warpSlider: {
     [theme.breakpoints.only('md')]: {
@@ -362,7 +366,7 @@ const styles = theme => ({
     },
     [theme.breakpoints.up('lg')]: {
       top: '-10px'
-    }  
+    }
   }
 });
 
@@ -471,7 +475,7 @@ class Controls extends Component {
             {index + 1}
           </Button>
         ))}
-          {/* <div
+        {/* <div
             className={classes.knob}
             onMouseDown={toggleMousePress}
             onMouseUp={handleMouseLeave}
@@ -486,24 +490,23 @@ class Controls extends Component {
               }}
             />
           </div> */}
-           <label className={classes.filter}>Filter</label>
-          <div className={ classes.slider}>
+        <label className={classes.filter}>Filter</label>
+        <div className={classes.slider}>
           <Slider
-              style={{ width: '100%', height: '20px' }}
-              classes={{
-                trackContainer: classes.slider,
-                warp: classes.warpSlider,
-                pointer: classes.sliderPointer
-              }}
-              min={0}
-              max={10}
-              value={effects.currentValue}
-              onChange={value => setValueEffect(value, 'filter')}
-              componentPropType="span"
-            />
-
-          </div>
-          {/* <label className={classes.delay}>Delay</label>
+            style={{ width: '100%', height: '20px' }}
+            classes={{
+              trackContainer: classes.slider,
+              warp: classes.warpSlider,
+              pointer: classes.sliderPointer
+            }}
+            min={0}
+            max={10}
+            value={effects.currentValue}
+            onChange={value => setValueEffect(value, 'filter')}
+            componentPropType="span"
+          />
+        </div>
+        {/* <label className={classes.delay}>Delay</label>
           <div className={ classes.sliderDelay}>
           <Slider
               style={{ width: '100%', height: '20px' }}
@@ -541,13 +544,17 @@ class Controls extends Component {
           onClick={() => togglePlay()}
           classes={{ root: classes.playButton }}
         >
-          {!playing ? <PlayArrow /> : <Stop />}
+          {!playing ? (
+            <PlayArrow classes={{ root: classes.icons }} />
+          ) : (
+            <Stop classes={{root: classes.icons}}/>
+          )}
         </Button>
         <Button
           onClick={() => handleClearAll()}
           classes={{ root: classes.clearButton }}
         >
-          <ClearAll />
+          <ClearAll classes={{ root: classes.icons }} />
         </Button>
       </React.Fragment>
     );
