@@ -19,7 +19,20 @@ const getSteps = (state, props) => {
     ].hasOwnProperty(props.instrumentName) ?
     state.drummachine.beatSteps[
       state.drummachine.parts[state.drummachine.activePart]
-    ][props.instrumentName] : state.drummachine.beatSteps.steps
+    ][props.instrumentName] :  props.row === '6' ? 
+      [
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+        { step: 0, amplitude: 100 },
+      ] :
+     state.drummachine.beatSteps.steps
   );
 };
 const getPart = state => state.drummachine.parts[state.drummachine.activePart];
@@ -36,7 +49,7 @@ const getMuteState = (state, props) =>
       : false
     : false;
 const getSoloInstruments = state => state.drummachine.soloInstruments;
-
+const getCurrentStep = (state, props) =>  props.row === '6' && state.drummachine.drummachine.currentStep;
 const makeInstrumentRowData = () =>
   createSelector(
     [
@@ -46,7 +59,8 @@ const makeInstrumentRowData = () =>
       getActivePart,
       getMainGain,
       getSoloInstruments,
-      getMuteState
+      getMuteState,
+      getCurrentStep
     ],
     (
       steps,
@@ -55,7 +69,8 @@ const makeInstrumentRowData = () =>
       activePart,
       mainGain,
       soloInstruments,
-      getMuteState
+      getMuteState,
+      getCurrentStep
     ) => {
       return {
         steps,
@@ -64,7 +79,8 @@ const makeInstrumentRowData = () =>
         activePart,
         mainGain,
         soloInstruments,
-        mute: getMuteState
+        mute: getMuteState,
+        getCurrentStep
       };
     }
   );
@@ -123,7 +139,23 @@ class InstrumentRowSmart extends React.PureComponent {
   };
 
   toggleStep = (index, volume) => {
-    const { instrumentName, steps } = this.props;
+    const { instrumentName, row } = this.props;
+    let { steps } = this.props;
+
+    // if(row === '6') {
+    //   steps = [
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //     { step: 0, amplitude: 100 },
+    //   ]
+    // }
     this.props.toggleStep(instrumentName, index, volume, steps);
   };
 
@@ -196,9 +228,10 @@ class InstrumentRowSmart extends React.PureComponent {
       allInstruments,
       setInstrument,
       mute,
-      steps
+      getCurrentStep
+      // steps
     } = this.props;
-    // let { steps } = this.props;
+    let { steps } = this.props;
 
     // if(row === '6') {
     //   steps = [
@@ -211,6 +244,7 @@ class InstrumentRowSmart extends React.PureComponent {
     //     { step: 0, amplitude: 100 },
     //   ]
     // }
+    console.log(this.props)
     return (
       <InstrumentRow
         instrumentName={instrumentName}
@@ -227,6 +261,7 @@ class InstrumentRowSmart extends React.PureComponent {
         allInstruments={allInstruments}
         setInstrument={setInstrument}
         mute={mute}
+        getCurrentStep={getCurrentStep}
       />
     );
   }

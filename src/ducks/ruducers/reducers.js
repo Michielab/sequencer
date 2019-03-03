@@ -67,7 +67,7 @@ const toggleStep = (
 
   const stepValue =
     steps[index].step === 1 ? (steps[index].amplitude !== volume ? 1 : 0) : 1;
-
+  
   beatSteps[part][instrumentName] = [...steps];
   beatSteps[part][instrumentName][index] = {
     step: stepValue,

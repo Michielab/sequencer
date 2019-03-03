@@ -29,7 +29,8 @@ const allInstruments = {
     'snare12',
     'snare13',
     'snare14',
-    'snare15'
+    'snare15',
+    'snareLinn'
   ],
   12: ['clap', 'clap2'],
   13: [
@@ -42,7 +43,8 @@ const allInstruments = {
     'kick7',
     'kick8',
     'kick9',
-    'kick10'
+    'kick10',
+    'kickLinn'
   ]
 };
 

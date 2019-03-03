@@ -188,7 +188,8 @@ class InstrumentRow extends React.PureComponent {
       soloInstruments,
       setInstrument,
       allInstruments,
-      mute
+      mute,
+      getCurrentStep
     } = this.props;
 
     let gainValue = mute ? 0 : mainGain;
@@ -286,7 +287,7 @@ class InstrumentRow extends React.PureComponent {
                 style={{
                   width: '100%',
                   borderRadius: '35%',
-                  backgroundColor: steps[index].step === 0 ? '' : '#404572',
+                  backgroundColor:  getCurrentStep ? getCurrentStep % steps.length === index ? '#2AB859' :  steps[index].step === 0 ? '' : '#404572': steps[index].step === 0 ? '' : '#404572',
                   position: 'absolute',
                   bottom: 0,
                   height: `${step.amplitude}%`

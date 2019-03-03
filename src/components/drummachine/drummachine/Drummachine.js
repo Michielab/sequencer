@@ -144,6 +144,10 @@ class Drummachine extends Component {
       this.snare15Buffer = buffer;
     });
 
+    sampleLoader('./sdLinn.wav', this.audioContext, buffer => {
+      this.snareLinnBuffer = buffer;
+    });
+
     // cr
 
     sampleLoader('./cr01.wav', this.audioContext, buffer => {
@@ -198,6 +202,10 @@ class Drummachine extends Component {
     });
     sampleLoader('./bd10.wav', this.audioContext, buffer => {
       this.kick10Buffer = buffer;
+    });
+
+    sampleLoader('./bdLinn.wav', this.audioContext, buffer => {
+      this.kickLinnBuffer = buffer;
     });
 
     // oh 
@@ -295,8 +303,10 @@ class Drummachine extends Component {
       bpm,
       effects,
       delay,
-      feedback
+      feedback,
+      parts
     } = this.props;
+    console.log(beatSteps)
 
     let newDeadLine = deadline;
     const newCurrentStep = currentStep + 1;
@@ -344,17 +354,26 @@ class Drummachine extends Component {
         ? [...steps, ...steps]
         : steps;
 
+
+    
+
     // eslint-disable-next-line array-callback-return
     Object.keys(beats).map((instrument, index) => {
-      if (beats[instrument][newCurrentStep % steps.length]) {
-        if (beats[instrument][newCurrentStep % steps.length].step) {
+          // define steps length
+   let stepTest = beatSteps[
+     'partOne'
+    ].hasOwnProperty(instrument) ?   beatSteps[
+      parts[0]
+    ][instrument] : steps
+      if (beats[instrument][newCurrentStep % stepTest.length]) {
+        if (beats[instrument][newCurrentStep % stepTest.length].step) {
           const buffer = instrument + 'Buffer';
 
           const amplitudeValue = amplitude.hasOwnProperty(instrument)
             ? ((amplitude[instrument] / 100) *
-                beats[instrument][newCurrentStep % steps.length].amplitude) /
+                beats[instrument][newCurrentStep % stepTest.length].amplitude) /
               100
-            : beats[instrument][newCurrentStep % steps.length].amplitude / 100;
+            : beats[instrument][newCurrentStep % stepTest.length].amplitude / 100;
 
           let gainValue = amplitude.hasOwnProperty(instrument + 'Mute')
             ? amplitude[instrument + 'Mute']
