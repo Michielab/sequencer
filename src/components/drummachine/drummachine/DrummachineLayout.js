@@ -7,13 +7,73 @@ import ControlsSmart from '~/components/drummachine/controls/ControlsSmart';
 import StepsIndicatorSmart from '~/components/drummachine/stepsIndicator/StepsIndicatorSmart';
 
 const allInstruments = {
-  4: ['ride', 'ride2', 'ride3'],
-  5: ['crash', 'crash2'],
-  6: ['hh', 'hh2'],
-  7: ['oh', 'oh2'],
-  8: ['ht', 'h2', 'h3'],
+  4: [
+    'ride',
+    'ride2',
+    'ride3',
+    'ohL',
+    'rideL2',
+    'rideL3',
+    'rideL4',
+    'rideL5',
+    'rideL6',
+    'cbL',
+    'cbL2',
+    'cbL3',
+    'cbL4',
+    'cbL5',
+    'cbL6'
+  ],
+  5: [
+    'crash',
+    'crash2',
+    'crashL',
+    'crashL2',
+    'crashL3',
+    'rimL',
+    'rimL2',
+    'rimL3',
+    'rimL4',
+    'rimL5',
+    'rimL6',
+    'rimL7',
+    'rimL8',
+    'rimL9',
+    'rimL10'
+  ],
+
+  6: [
+    'hh',
+    'hh2',
+    'hhL',
+    'hhL2',
+    'hhL3',
+    'hhL4',
+    'hhL5',
+    'hhL6',
+    'hhL7',
+    'hhL8',
+    'hhL9',
+    'hhL10',
+    'hhL11',
+    'hhL12'
+  ],
+  7: ['oh', 'oh2', 'ohL', 'ohL2', 'ohL3', 'ohL4', 'ohL5', 'ohL6'],
+  8: ['ht', 'h2', 'h3', 'caL', 'caL2', 'caL3', 'caL4', 'caL5', 'caL6'],
   9: ['mt', 'mt2'],
-  10: ['lt', 'lt2'],
+  10: [
+    'lt',
+    'lt2',
+    'linnT',
+    'linnT2',
+    'linnT3',
+    'linnT4',
+    'linnT5',
+    'linnT6',
+    'linnT7',
+    'linnT8',
+    'linnT9'
+  ],
   11: [
     'snare',
     'snare2',
@@ -30,9 +90,44 @@ const allInstruments = {
     'snare13',
     'snare14',
     'snare15',
-    'snareLinn'
+    'snareL',
+    'snareL2',
+    'snareL3',
+    'snareL4',
+    'snareL5',
+    'snareL6',
+    'snareL7',
+    'snareL8',
+    'snareL9',
+    'snareL10',
+    'snareL11',
+    'snareL12',
+    'snareL13',
+    'snareL14',
+    'snareL15',
+    'snareL16',
+    'snareL17',
+    'snareL18',
+    'snareL19',
+    'snareL20',
+    'snareL21',
+    'snareL22',
+    'snareL23',
+    'snareL24'
   ],
-  12: ['clap', 'clap2'],
+  12: [
+    'clap',
+    'clap2',
+    'clapL',
+    'clapL2',
+    'clapL3',
+    'clapL4',
+    'clapL5',
+    'clapL6',
+    'clapL7',
+    'clapL8',
+    'clapL9'
+  ],
   13: [
     'kick',
     'kick2',
@@ -44,7 +139,22 @@ const allInstruments = {
     'kick8',
     'kick9',
     'kick10',
-    'kickLinn'
+    'kickL',
+    'kickL2',
+    'kickL3',
+    'kickL4',
+    'kickL5',
+    'kickL6',
+    'kickL7',
+    'kickL8',
+    'kickL9',
+    'kickL10',
+    'kickL11',
+    'kickL12',
+    'kickL13',
+    'kickL14',
+    'kickL15',
+    'kickL16'
   ]
 };
 
@@ -89,10 +199,10 @@ const styles = theme =>
       gridGap: '5px',
       [theme.breakpoints.only('xs')]: {
         gridGap: '1px',
-        width: '95%',
+        width: '95%'
       },
       [theme.breakpoints.only('sm')]: {
-        gridGap: '3px',
+        gridGap: '3px'
       }
     },
     controlsWrapper: {
