@@ -19,7 +19,7 @@ const styles = theme =>
         backgroundColor: '#212121'
       },
       [theme.breakpoints.only('xs')]: {
-        width: '100%',
+        width: '90%',
         minWidth: '20px',
         minHeight: '20px',
         height: '80%',
@@ -29,7 +29,7 @@ const styles = theme =>
       [theme.breakpoints.only('sm')]: {
         width: '100%',
         minWidth: '29px',
-        minHeight: '30px',
+        minHeight: '28px',
         height: '80%',
         alignSelf: 'center',
         borderWidth: '1px'
@@ -51,10 +51,12 @@ const styles = theme =>
       marginRight: '10px',
       color: 'floralwhite',
       [theme.breakpoints.only('xs')]: {
-        marginRight: 0
+        marginRight: 0,
+        maxHeight: '25px'
       },
       [theme.breakpoints.only('sm')]: {
-        marginRight: 2
+        marginRight: 2,
+        maxHeight: '25px'
       }
     },
     muteButton: {

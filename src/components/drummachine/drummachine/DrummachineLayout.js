@@ -64,11 +64,13 @@ const styles = theme =>
       boxShadow: '32px 24px 62px -7px rgba(0,0,0,0.56)',
       [theme.breakpoints.only('xs')]: {
         padding: 5,
-        width: '95%'
+        width: '95%',
+        maxHeight: 'calc(100% - 10px)'
       },
       [theme.breakpoints.only('sm')]: {
-        padding: 10,
-        width: '95%'
+        padding: 5,
+        width: '95%',
+        maxHeight: 'calc(100% - 10px)'
       },
       [theme.breakpoints.up('lg')]: {
         width: '100%'
@@ -84,10 +86,11 @@ const styles = theme =>
       rowGap: '5px',
       gridGap: '5px',
       [theme.breakpoints.only('xs')]: {
-        gridGap: '1px'
+        gridGap: '1px',
+        width: '95%',
       },
       [theme.breakpoints.only('sm')]: {
-        gridGap: '3px'
+        gridGap: '3px',
       }
     },
     controlsWrapper: {

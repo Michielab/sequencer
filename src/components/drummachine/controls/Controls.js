@@ -54,7 +54,8 @@ const styles = theme => ({
       gridColumn: '2 / 4',
       width: '40px',
       borderWidth: '1px',
-      justifySelf: 'left'
+      justifySelf: 'left',
+      marginBottom: '0px',
     },
     [theme.breakpoints.only('md')]: {
       marginRight: 0,
@@ -81,7 +82,8 @@ const styles = theme => ({
       textAlign: 'left',
       fontSize: '13px',
       justifySelf: 'right',
-      gridColumn: '3 / 5'
+      gridColumn: '3 / 5',
+      marginBottom: '2px',
     },
     [theme.breakpoints.only('md')]: {
       textAlign: 'right',
@@ -114,7 +116,8 @@ const styles = theme => ({
       gridColumn: '5 / 7',
       width: '40px',
       borderWidth: '1px',
-      justifySelf: 'left'
+      justifySelf: 'left',
+      marginBottom: '2px',
     },
     [theme.breakpoints.only('md')]: {
       marginRight: 0,
@@ -150,8 +153,9 @@ const styles = theme => ({
       gridColumn: '14 / 16',
       alignSelf: 'center',
       minHeight: 'unset',
-      height: '30px',
-      marginBottom: '10px',
+      height: '25px',
+      marginBottom: '2px',
+
       borderWidth: '1px',
       justifySelf: 'right'
     },
@@ -184,7 +188,8 @@ const styles = theme => ({
       width: '100%',
       minWidth: '20px',
       minHeight: 'unset',
-      marginBottom: '10px',
+      marginBottom: '2px',
+
       alignSelf: 'center',
       height: '25px',
       borderWidth: '1px',
@@ -223,7 +228,7 @@ const styles = theme => ({
       minWidth: '20px',
       gridColumn: '16 / 18',
       minHeight: 'unset',
-      height: '30px',
+      height: '25px',
       borderWidth: '1px',
       justifySelf: 'center'
     },

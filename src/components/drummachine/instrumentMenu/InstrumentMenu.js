@@ -38,7 +38,7 @@ class InstrumentMenu extends React.Component {
               '*:focus': {
                 outline: 'none'
               },
-              webkitBoxShadow: 'none',
+              // webkitBoxShadow: 'none',
               boxShadow: 'none'
             },
           }}

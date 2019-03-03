@@ -46,7 +46,6 @@ const toggleStep = (
   parts,
   part
 ) => {
-
   if (
     (!beatSteps[parts[0]].hasOwnProperty(instrumentName) && activePart === 1) ||
     (!beatSteps[parts[0]].hasOwnProperty(instrumentName) && activePart === 2) ||
@@ -69,12 +68,12 @@ const toggleStep = (
   const stepValue =
     steps[index].step === 1 ? (steps[index].amplitude !== volume ? 1 : 0) : 1;
 
-  beatSteps[part][instrumentName] = steps;
+  beatSteps[part][instrumentName] = [...steps];
   beatSteps[part][instrumentName][index] = {
     step: stepValue,
     amplitude: volume
   };
-  return beatSteps
+  return beatSteps;
 };
 
 const audioContextDefaultState = {
@@ -214,7 +213,6 @@ const drummachine = (state = audioContextDefaultState, action) => {
         audioContext: action.payload.audioContext
       };
     case TOGGLE_STEP:
-      const part =  'partOne'
       const newSteps = toggleStep(
         action.payload.instrumentName,
         action.payload.index,
@@ -223,7 +221,7 @@ const drummachine = (state = audioContextDefaultState, action) => {
         state.beatSteps,
         state.activePart,
         state.parts,
-        part
+        state.parts[state.activePart]
       );
       return {
         ...state,

@@ -16,10 +16,10 @@ const getSteps = (state, props) => {
   return (
     state.drummachine.beatSteps[
       state.drummachine.parts[state.drummachine.activePart]
-    ].hasOwnProperty(props.instrumentName) &&
+    ].hasOwnProperty(props.instrumentName) ?
     state.drummachine.beatSteps[
       state.drummachine.parts[state.drummachine.activePart]
-    ][props.instrumentName]
+    ][props.instrumentName] : state.drummachine.beatSteps.steps
   );
 };
 const getPart = state => state.drummachine.parts[state.drummachine.activePart];
@@ -123,29 +123,7 @@ class InstrumentRowSmart extends React.PureComponent {
   };
 
   toggleStep = (index, volume) => {
-    const { instrumentName } = this.props;
-    let { steps } = this.props;
-
-    if (!steps) {
-      steps = [
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 }
-      ];
-    }
+    const { instrumentName, steps } = this.props;
     this.props.toggleStep(instrumentName, index, volume, steps);
   };
 
@@ -217,30 +195,10 @@ class InstrumentRowSmart extends React.PureComponent {
       soloInstruments = [],
       allInstruments,
       setInstrument,
-      mute
+      mute,
+      steps
     } = this.props;
 
-    let { steps } = this.props;
-    if (!steps) {
-      steps = [
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 }
-      ];
-    }
     return (
       <InstrumentRow
         instrumentName={instrumentName}
