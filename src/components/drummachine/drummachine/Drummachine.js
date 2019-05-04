@@ -1104,6 +1104,7 @@ class Drummachine extends Component {
 
     let newDeadLine = deadline;
     const newCurrentStep = currentStep + 1;
+    // eslint-disable-next-line no-unused-vars
     let steps = [
       { step: 0, amplitude: 100 },
       { step: 0, amplitude: 100 },
