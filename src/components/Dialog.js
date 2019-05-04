@@ -15,11 +15,11 @@ const styles = () =>
       backgroundColor: '#212121'
     },
     title: {
-      color: 'rgba(255, 255, 255)',
+      color: 'white',
       fontSize: '20px'
     },
     titles: {
-      color: 'rgba(255, 255, 255)'
+      color: 'white'
     },
     text: {
       color: 'rgba(255, 255, 255, 0.8)',
