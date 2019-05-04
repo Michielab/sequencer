@@ -15,7 +15,8 @@ import {
   HANDLE_VALUE_EFFECT_CHANGE,
   HANDLE_DELAY_CHANGE,
   HANDLE_FEEDBACK_CHANGE,
-  HANDLE_INSTRUMENT_CHANGE
+  HANDLE_INSTRUMENT_CHANGE,
+  HANDLE_STEPS_CHANGE
 } from '~/ducks/actions/actions';
 import { combineReducers } from 'redux';
 
@@ -75,6 +76,12 @@ const toggleStep = (
   };
   return beatSteps;
 };
+
+const updateStepsRow = (index,instrumentName, beatSteps, part) => {
+  let newSteps = beatSteps.steps.filter((el,indx) => indx <= index)
+  beatSteps[part][instrumentName] = [...newSteps]
+  return beatSteps
+}
 
 const audioContextDefaultState = {
   drummachine: {
@@ -342,6 +349,19 @@ const drummachine = (state = audioContextDefaultState, action) => {
         action.payload.prevInstrument,
         action.payload.instrumentName
       );
+      return {
+        ...state,
+        beatSteps: newBeatsteps
+      };
+    }
+    case HANDLE_STEPS_CHANGE: {
+      const newBeatsteps = updateStepsRow(
+        action.payload.index,
+        action.payload.instrumentName,
+        state.beatSteps,
+        state.parts[state.activePart]
+      );
+      console.log(newBeatsteps)
       return {
         ...state,
         beatSteps: newBeatsteps

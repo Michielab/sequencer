@@ -4,6 +4,7 @@ import { withStyles, createStyles, Button } from '@material-ui/core';
 import { Slider } from 'material-ui-slider';
 import { VolumeMute, VolumeUp } from '@material-ui/icons/';
 import InstrumentMenu from '../instrumentMenu/InstrumentMenu';
+import ConnectedButton from '../button/ConnectedButton';
 
 const styles = theme =>
   createStyles({
@@ -28,7 +29,7 @@ const styles = theme =>
       },
       [theme.breakpoints.only('sm')]: {
         width: '100%',
-        minWidth: '29px',
+        minWidth: '25px',
         minHeight: '28px',
         height: '80%',
         alignSelf: 'center',
@@ -92,12 +93,35 @@ const styles = theme =>
         marginBottom: '1px'
       }
     },
+    solo2Button: {
+      border: '1px solid',
+      borderRadius: '50%',
+      minWidth: 'unset',
+      minHeight: 'unset',
+      width: '20px',
+      height: '20px',
+      alignSelf: 'center',
+      // gridColumn: 17,
+      color: '#D3D3D3',
+      padding: '0',
+      marginLeft: '2px',
+      [theme.breakpoints.only('xs')]: {
+        display: 'none'
+      },
+      [theme.breakpoints.only('sm')]: {
+        fontSize: '10px',
+        width: '15px',
+        marginBottom: '1px'
+      }
+    },
     instrumentNameContainer: {
       display: 'flex',
       alignItems: 'center',
       flexDirection: 'column',
       marginLeft: '10px',
-      width: '100%',
+      [theme.breakpoints.up('lg')]: {
+        width: '70px'
+      },
       [theme.breakpoints.only('xs')]: {
         marginLeft: 0,
         fontSize: '8px',
@@ -106,6 +130,10 @@ const styles = theme =>
       [theme.breakpoints.only('sm')]: {
         fontSize: '12px',
         width: '40px'
+      },
+      [theme.breakpoints.only('md')]: {
+        fontSize: '12px',
+        width: '50px'
       }
     },
     warpSlider: {
@@ -189,7 +217,7 @@ class InstrumentRow extends React.PureComponent {
       setInstrument,
       allInstruments,
       mute,
-      getCurrentStep
+      adjustSteps
     } = this.props;
 
     let gainValue = mute ? 0 : mainGain;
@@ -277,25 +305,42 @@ class InstrumentRow extends React.PureComponent {
                  `,
                 gridRow: `row ${row} / span 1 `
               }}
-              onMouseDown={e =>
-                this.handleMouseDown(e.clientY, index + instrumentName)
-              }
+              onMouseDown={e => {
+                this.handleMouseDown(e.clientY, index + instrumentName);
+              }}
               onMouseUp={e => this.handleMouseUp(e.clientY, index)}
               onMouseLeave={e => this.handleMouseOut(e.clientY, index)}
+              onDoubleClick={e => adjustSteps(index)}
+              onContextMenu={e => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
             >
               <span
                 style={{
                   width: '100%',
                   borderRadius: '35%',
-                  backgroundColor:  getCurrentStep ? getCurrentStep % steps.length === index ? '#2AB859' :  steps[index].step === 0 ? '' : '#404572': steps[index].step === 0 ? '' : '#404572',
+                  backgroundColor: steps[index].step === 0 ? '' : '#404572',
                   position: 'absolute',
                   bottom: 0,
                   height: `${step.amplitude}%`
                 }}
               />
+              {steps.length < 16 && (
+                <ConnectedButton stepLength={steps.length} index={index} instrumentName={instrumentName} />
+              )}
             </Button>
           </React.Fragment>
         ))}
+        <Button
+          style={{
+            gridRow: `row ${row} / span 1 `
+          }}
+          className={classes.solo2Button}
+          onMouseDown={() => adjustSteps(16)}
+        >
+          D
+        </Button>
       </React.Fragment>
     );
   }

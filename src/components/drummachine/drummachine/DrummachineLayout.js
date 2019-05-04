@@ -162,7 +162,7 @@ const styles = theme =>
   createStyles({
     container: {
       position: 'absolute',
-      maxWidth: '1200px',
+      maxWidth: '1230px',
       borderRadius: '5px',
       top: ' 50%',
       left: ' 50%',
@@ -221,8 +221,8 @@ const styles = theme =>
 class DrumMachineLayout extends Component {
   state = {
     instruments: {
-      4: 'ride',
-      5: 'crash',
+      4: 'cbL',
+      5: 'rimL',
       6: 'hh',
       7: 'oh',
       8: 'ht',

@@ -62,201 +62,393 @@ class Drummachine extends Component {
 
     // linn
     // highHat
-    sampleLoader('./wa_free_ldrum_cl-hat_01_t1.wav', this.audioContext, buffer => {
-      this.hhLBuffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_cl-hat_01_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.hhLBuffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_cl-hat_01_t2.wav', this.audioContext, buffer => {
-      this.hhL2Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_cl-hat_01_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.hhL2Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_cl-hat_01_t3.wav', this.audioContext, buffer => {
-      this.hhL3Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_cl-hat_01_t3.wav',
+      this.audioContext,
+      buffer => {
+        this.hhL3Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_cl-hat_02_t1.wav', this.audioContext, buffer => {
-      this.hhL4Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_cl-hat_02_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.hhL4Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_cl-hat_02_t2.wav', this.audioContext, buffer => {
-      this.hhL5Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_cl-hat_02_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.hhL5Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_cl-hat_02_t3.wav', this.audioContext, buffer => {
-      this.hhL6Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_cl-hat_02_t3.wav',
+      this.audioContext,
+      buffer => {
+        this.hhL6Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_cl-hat_03_t1.wav', this.audioContext, buffer => {
-      this.hhL7Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_cl-hat_03_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.hhL7Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_cl-hat_03_t2.wav', this.audioContext, buffer => {
-      this.hhL8Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_cl-hat_03_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.hhL8Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_cl-hat_03_t3.wav', this.audioContext, buffer => {
-      this.hhL9Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_cl-hat_03_t3.wav',
+      this.audioContext,
+      buffer => {
+        this.hhL9Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_cl-hat_04_t1.wav', this.audioContext, buffer => {
-      this.hhL10Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_cl-hat_04_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.hhL10Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_cl-hat_04_t2.wav', this.audioContext, buffer => {
-      this.hhL11Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_cl-hat_04_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.hhL11Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_cl-hat_04_t3.wav', this.audioContext, buffer => {
-      this.hhL12Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_cl-hat_04_t3.wav',
+      this.audioContext,
+      buffer => {
+        this.hhL12Buffer = buffer;
+      }
+    );
 
     // clap
-    sampleLoader('./wa_free_ldrum_clap_01_t1.wav', this.audioContext, buffer => {
-      this.clapLBuffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_clap_01_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.clapLBuffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_clap_01_t2.wav', this.audioContext, buffer => {
-      this.clapL2Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_clap_01_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.clapL2Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_clap_01_t3.wav', this.audioContext, buffer => {
-      this.clapL3Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_clap_01_t3.wav',
+      this.audioContext,
+      buffer => {
+        this.clapL3Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_clap_02_t1.wav', this.audioContext, buffer => {
-      this.clapL4Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_clap_02_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.clapL4Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_clap_02_t2.wav', this.audioContext, buffer => {
-      this.clapL5Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_clap_02_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.clapL5Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_clap_02_t3.wav', this.audioContext, buffer => {
-      this.clapL6Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_clap_02_t3.wav',
+      this.audioContext,
+      buffer => {
+        this.clapL6Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_clap_03_t1.wav', this.audioContext, buffer => {
-      this.clapL7Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_clap_03_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.clapL7Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_clap_03_t2.wav', this.audioContext, buffer => {
-      this.clapL8Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_clap_03_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.clapL8Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_clap_03_t3.wav', this.audioContext, buffer => {
-      this.clapL9Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_clap_03_t3.wav',
+      this.audioContext,
+      buffer => {
+        this.clapL9Buffer = buffer;
+      }
+    );
 
     // sd
-    sampleLoader('./wa_free_ldrum_snare_01_t1.wav', this.audioContext, buffer => {
-      this.snareLBuffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_01_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.snareLBuffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_01_t2.wav', this.audioContext, buffer => {
-      this.snareL2Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_01_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL2Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_01_t3.wav', this.audioContext, buffer => {
-      this.snareL3Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_01_t3.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL3Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_02_t1.wav', this.audioContext, buffer => {
-      this.snareL4Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_02_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL4Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_02_t2.wav', this.audioContext, buffer => {
-      this.snareL5Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_02_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL5Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_02_t3.wav', this.audioContext, buffer => {
-      this.snareL6Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_02_t3.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL6Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_03_t1.wav', this.audioContext, buffer => {
-      this.snareL7Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_03_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL7Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_03_t2.wav', this.audioContext, buffer => {
-      this.snareL8Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_03_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL8Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_04_t1.wav', this.audioContext, buffer => {
-      this.snareL9Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_04_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL9Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_04_t2.wav', this.audioContext, buffer => {
-      this.snareL10Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_04_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL10Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_05_t1.wav', this.audioContext, buffer => {
-      this.snareL11Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_05_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL11Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_05_t2.wav', this.audioContext, buffer => {
-      this.snareL12Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_05_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL12Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_06_t1.wav', this.audioContext, buffer => {
-      this.snareL13Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_06_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL13Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_06_t2.wav', this.audioContext, buffer => {
-      this.snareL14Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_06_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL14Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_07_t1.wav', this.audioContext, buffer => {
-      this.snareL15Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_07_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL15Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_07_t2.wav', this.audioContext, buffer => {
-      this.snareL16Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_07_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL16Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_08_t1.wav', this.audioContext, buffer => {
-      this.snareL17Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_08_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL17Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_08_t2.wav', this.audioContext, buffer => {
-      this.snareL18Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_08_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL18Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_09_t1.wav', this.audioContext, buffer => {
-      this.snareL19Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_09_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL19Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_09_t2.wav', this.audioContext, buffer => {
-      this.snareL20Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_09_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL20Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_10_t1.wav', this.audioContext, buffer => {
-      this.snareL21Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_10_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL21Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_10_t2.wav', this.audioContext, buffer => {
-      this.snareL22Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_10_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL22Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_11_t1.wav', this.audioContext, buffer => {
-      this.snareL23Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_11_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL23Buffer = buffer;
+      }
+    );
 
-    sampleLoader('./wa_free_ldrum_snare_11_t2.wav', this.audioContext, buffer => {
-      this.snareL24Buffer = buffer;
-    });
+    sampleLoader(
+      './wa_free_ldrum_snare_11_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.snareL24Buffer = buffer;
+      }
+    );
 
     // cr
 
-    sampleLoader('./wa_free_ldrum_crash_01_t1.wav', this.audioContext, buffer => {
-            this.crashLBuffer = buffer;
-          });
+    sampleLoader(
+      './wa_free_ldrum_crash_01_t1.wav',
+      this.audioContext,
+      buffer => {
+        this.crashLBuffer = buffer;
+      }
+    );
 
-          sampleLoader('./wa_free_ldrum_crash_01_t2.wav', this.audioContext, buffer => {
-            this.crashL2Buffer = buffer;
-          });
+    sampleLoader(
+      './wa_free_ldrum_crash_01_t2.wav',
+      this.audioContext,
+      buffer => {
+        this.crashL2Buffer = buffer;
+      }
+    );
 
-          sampleLoader('./wa_free_ldrum_crash_01_t3.wav', this.audioContext, buffer => {
-            this.crashL3Buffer = buffer;
-          });
+    sampleLoader(
+      './wa_free_ldrum_crash_01_t3.wav',
+      this.audioContext,
+      buffer => {
+        this.crashL3Buffer = buffer;
+      }
+    );
 
     // ride
     sampleLoader(
@@ -904,10 +1096,11 @@ class Drummachine extends Component {
       bpm,
       effects,
       delay,
-      feedback,
-      parts
+      feedback
+      // parts,
+      // activePart
     } = this.props;
-    console.log(beatSteps)
+    // console.log(beatSteps)
 
     let newDeadLine = deadline;
     const newCurrentStep = currentStep + 1;
@@ -935,7 +1128,7 @@ class Drummachine extends Component {
     let keyArray = Object.keys(beatSteps).filter(
       element => element !== 'steps'
     );
-    // console.log(beatSteps)
+
     keyArray.map(part =>
       Object.keys(beatSteps[part]).map((instrument, index) => {
         return beats.hasOwnProperty(instrument)
@@ -955,26 +1148,35 @@ class Drummachine extends Component {
         ? [...steps, ...steps]
         : steps;
 
-
-    
-
     // eslint-disable-next-line array-callback-return
     Object.keys(beats).map((instrument, index) => {
-          // define steps length
-   let stepTest = beatSteps[
-     'partOne'
-    ].hasOwnProperty(instrument) ?   beatSteps[
-      parts[0]
-    ][instrument] : steps
-      if (beats[instrument][newCurrentStep % stepTest.length]) {
-        if (beats[instrument][newCurrentStep % stepTest.length].step) {
+      const setStepLength =
+        selectedParts.length === 4
+          ? beatSteps['partFour'][instrument].length +
+            beatSteps['partThree'][instrument].length +
+            beatSteps['partTwo'][instrument].length +
+            beatSteps['partOne'][instrument].length
+          :  selectedParts.length === 3
+          ? 
+          beatSteps['partThree'][instrument].length +
+          beatSteps['partTwo'][instrument].length +
+          beatSteps['partOne'][instrument].length
+          : selectedParts.length === 2
+          ? 
+          beatSteps['partTwo'][instrument].length +
+          beatSteps['partOne'][instrument].length
+          :  beatSteps['partOne'][instrument].length;
+      if (beats[instrument][newCurrentStep % setStepLength]) {
+        if (beats[instrument][newCurrentStep % setStepLength].step) {
           const buffer = instrument + 'Buffer';
 
           const amplitudeValue = amplitude.hasOwnProperty(instrument)
             ? ((amplitude[instrument] / 100) *
-                beats[instrument][newCurrentStep % stepTest.length].amplitude) /
+                beats[instrument][newCurrentStep % setStepLength]
+                  .amplitude) /
               100
-            : beats[instrument][newCurrentStep % stepTest.length].amplitude / 100;
+            : beats[instrument][newCurrentStep % setStepLength]
+                .amplitude / 100;
 
           let gainValue = amplitude.hasOwnProperty(instrument + 'Mute')
             ? amplitude[instrument + 'Mute']
@@ -984,7 +1186,7 @@ class Drummachine extends Component {
 
           if (swing > 0 && newCurrentStep % 2 === 1) {
             newDeadLine =
-              newDeadLine + (this.covertBMPtoSeconds(bpm) / 50) * swing;
+              newDeadLine + (this.covertBMPtoSeconds(bpm) / 30) * swing;
           }
 
           // eslint-disable-next-line no-unused-expressions

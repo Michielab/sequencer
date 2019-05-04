@@ -8,32 +8,19 @@ import {
   handleAmplitudeChange,
   toggleMute,
   handleSoloToggle,
-  handleInstrumentChange
+  handleInstrumentChange,
+  handleStepsChange
 } from '~/ducks/actions/actions';
 import InstrumentRow from './InstrumentRow';
 
 const getSteps = (state, props) => {
-  return (
-    state.drummachine.beatSteps[
-      state.drummachine.parts[state.drummachine.activePart]
-    ].hasOwnProperty(props.instrumentName) ?
-    state.drummachine.beatSteps[
-      state.drummachine.parts[state.drummachine.activePart]
-    ][props.instrumentName] :  props.row === '6' ? 
-      [
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-        { step: 0, amplitude: 100 },
-      ] :
-     state.drummachine.beatSteps.steps
-  );
+  return state.drummachine.beatSteps[
+    state.drummachine.parts[state.drummachine.activePart]
+  ].hasOwnProperty(props.instrumentName)
+    ? state.drummachine.beatSteps[
+        state.drummachine.parts[state.drummachine.activePart]
+      ][props.instrumentName]
+    : state.drummachine.beatSteps.steps;
 };
 const getPart = state => state.drummachine.parts[state.drummachine.activePart];
 const getParts = state => state.drummachine.parts;
@@ -49,7 +36,6 @@ const getMuteState = (state, props) =>
       : false
     : false;
 const getSoloInstruments = state => state.drummachine.soloInstruments;
-const getCurrentStep = (state, props) =>  props.row === '6' && state.drummachine.drummachine.currentStep;
 const makeInstrumentRowData = () =>
   createSelector(
     [
@@ -59,8 +45,7 @@ const makeInstrumentRowData = () =>
       getActivePart,
       getMainGain,
       getSoloInstruments,
-      getMuteState,
-      getCurrentStep
+      getMuteState
     ],
     (
       steps,
@@ -69,8 +54,7 @@ const makeInstrumentRowData = () =>
       activePart,
       mainGain,
       soloInstruments,
-      getMuteState,
-      getCurrentStep
+      getMuteState
     ) => {
       return {
         steps,
@@ -79,8 +63,7 @@ const makeInstrumentRowData = () =>
         activePart,
         mainGain,
         soloInstruments,
-        mute: getMuteState,
-        getCurrentStep
+        mute: getMuteState
       };
     }
   );
@@ -100,7 +83,8 @@ const mapDispatchToProps = dispatch => {
       handleAmplitudeChange,
       toggleMute,
       handleSoloToggle,
-      handleInstrumentChange
+      handleInstrumentChange,
+      handleStepsChange
     },
     dispatch
   );
@@ -139,25 +123,15 @@ class InstrumentRowSmart extends React.PureComponent {
   };
 
   toggleStep = (index, volume) => {
-    const { instrumentName, row } = this.props;
-    let { steps } = this.props;
+    const { instrumentName, steps } = this.props;
 
-    // if(row === '6') {
-    //   steps = [
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //   ]
-    // }
     this.props.toggleStep(instrumentName, index, volume, steps);
   };
+
+  adjustSteps = (index) => {
+    const { instrumentName } = this.props;
+    this.props.handleStepsChange(index,instrumentName)
+  }
 
   changeAmplitude = (instrumentName, amplitudeValue) => {
     const { handleAmplitudeChange } = this.props;
@@ -228,23 +202,9 @@ class InstrumentRowSmart extends React.PureComponent {
       allInstruments,
       setInstrument,
       mute,
-      getCurrentStep
-      // steps
+      steps
     } = this.props;
-    let { steps } = this.props;
 
-    // if(row === '6') {
-    //   steps = [
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //     { step: 0, amplitude: 100 },
-    //   ]
-    // }
-    console.log(this.props)
     return (
       <InstrumentRow
         instrumentName={instrumentName}
@@ -261,7 +221,7 @@ class InstrumentRowSmart extends React.PureComponent {
         allInstruments={allInstruments}
         setInstrument={setInstrument}
         mute={mute}
-        getCurrentStep={getCurrentStep}
+        adjustSteps={this.adjustSteps}
       />
     );
   }

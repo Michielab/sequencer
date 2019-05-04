@@ -15,6 +15,7 @@ export const HANDLE_VALUE_EFFECT_CHANGE = 'HANDLE_VALUE_EFFECT_CHANGE';
 export const HANDLE_DELAY_CHANGE = 'HANDLE_DELAY_CHANGE';
 export const HANDLE_FEEDBACK_CHANGE = 'HANDLE_FEEDBACK_CHANGE';
 export const HANDLE_INSTRUMENT_CHANGE = 'HANDLE_INSTRUMENT_CHANGE';
+export const HANDLE_STEPS_CHANGE = 'HANDLE_STEPS_CHANGE';
 
 export const setCurrentStep = currentStep => ({
   type: 'SET_CURRENT_STEP',
@@ -128,6 +129,14 @@ export const handleInstrumentChange = (prevInstrument, instrumentName) => ({
   type: 'HANDLE_INSTRUMENT_CHANGE',
   payload: {
     prevInstrument,
+    instrumentName
+  }
+});
+
+export const handleStepsChange = (index, instrumentName) => ({
+  type: 'HANDLE_STEPS_CHANGE',
+  payload: {
+    index,
     instrumentName
   }
 });

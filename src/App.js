@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Drummachine from '~/components/drummachine/drummachine/DrummachineLayout';
 import Sequencer from '~/components/drummachine/drummachine/Drummachine';
+import ResponsiveDialog from '~/components/Dialog';
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
       >
         <Drummachine />
         <Sequencer />
+        <ResponsiveDialog />
       </div>
     );
   }
